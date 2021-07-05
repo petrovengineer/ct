@@ -1,0 +1,41 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBldHJvdmVuZ2luZWVyQGdtYWlsLmNvbSIsImlhdCI6MTYyNTUyNDExMiwiZXhwIjoxNjI2MTI4OTEyfQ.WbU6Lh-kdBeXcCrwjSa8xu3oBYx7pTRJTTphN0t1eE0
+
+### 
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "query":"query{users{name}}"
+}
+
+###
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "query":"mutation reg($name: String, $secondName: String, $email: String!, $password: String){reg(name: $name, secondName: $secondName, email: $email, password: $password) {name}}",
+    "variables":{
+        "email":"petrovengineer@gmail.com"
+    }
+}
+
+###
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "query":"mutation login($email: String!, $password: String){login(email: $email, password: $password) {accessToken}}",
+    "variables":{
+        "email":"petrovengineer@gmail.com",
+        "password":"1212"
+    }
+}
+
+### 
+POST http://localhost:3000/
+Content-Type: application/json
+Authorization: Basic {{token}}
+
+{
+    "query":"query{user{name secondName}}"
+}
