@@ -3,16 +3,14 @@ import {observer} from 'mobx-react'
 import UsersStore from '../store/users'
 
 const Users = observer(()=>{
-    const {users, getUsers} = UsersStore;
-    useEffect(()=>{
-        console.log("COMP USERS", users)
-    }, [users])
+    const {users, getUsers, isLoading} = UsersStore;
     useEffect(()=>{
         getUsers();
     }, [])
+    if(isLoading)return <h2>Loading...</h2>
     return (
         <>
-            <h1>Users</h1>
+            <h1 className="title">Users</h1>
             <ul>
                 {users.map(u=><li key={u._id}>{u.name}</li>)}
             </ul>

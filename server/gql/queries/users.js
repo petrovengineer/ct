@@ -17,7 +17,6 @@ module.exports = {
       type: UserType,
       description: 'Users Info',
       resolve: async (_, args, {email})=>{
-        console.log("EMAIL ", email)
         if(!email) throw new Error('Authentification fail!')
         return await User.findOne({email});
       }

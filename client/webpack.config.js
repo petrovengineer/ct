@@ -18,6 +18,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader',}
+        ]
+      },
+      {
         test: /\.s[ac]ss$/,
           exclude: /\.module\.scss$/,
           use: [
@@ -51,16 +58,20 @@ module.exports = {
         ]
       },
       {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            // options: {
+            //   name: '[name].[ext]',
+            //   outputPath: 'fonts/'
+            // }
+          }
+        ]
+      },
+      {
           test: /\.jsx?$/,
-          // exclude: /(node_modules)/,
           loader: "babel-loader",
-          // options:{
-          //   assumptions: {
-          //     "setPublicClassFields": true
-          //   },
-          //   plugins: ["@babel/plugin-proposal-decorators", {legacy: true, decoratorsBeforeExport: true} ],
-          //   presets:["@babel/preset-env", "@babel/preset-react"],
-          // }
       }
     ]
   },

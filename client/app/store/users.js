@@ -1,25 +1,18 @@
-import axios from 'axios'
-import {observable, action, makeAutoObservable, configure  } from 'mobx'
-
-configure({
-    useProxies: "always"
-})
+import {action, makeAutoObservable, configure  } from 'mobx'
+import api from '../api';
 
 class Users {
-    @observable users = []
+    users = []
+    isLoading = false;
     constructor() {
         makeAutoObservable(this)
     }
-    @action getUsers = () => {
-            axios.post('http://localhost:3000',{"query":"query{users{_id name}}"})
-            .then((response)=>{
-                this.users = response.data.data.users;
-            })
-            .catch((e)=>{
-                if(e.response && e.response.data && Array.isArray(e.response.data.errors)){
-                    console.log(e.response.data.errors[0].message);
-                }
-            })
+    getUsers = () => {
+            this.isLoading = true;
+            api("query{users{_id name}}")
+            .then(action(({users})=>{this.users = users}))
+            .catch((e)=>{})
+            .finally(action(()=>{this.isLoading = false}))
         }
     }
 
