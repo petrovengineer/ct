@@ -8,6 +8,9 @@ const schema = require('./gql/schema.js');
 let port = 3000;
 const app = express();
 
+var cors = require('cors');
+app.use(cors());
+
 const {authenticateToken} = require('./auth')
 app.use(authenticateToken);
 

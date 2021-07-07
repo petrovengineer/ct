@@ -1,6 +1,7 @@
 import React from 'react'
-import Drawer from './components/drawer.jsx'
-import styles from './styles/drawer.scss'
+import Drawer from './drawer.jsx'
+import Main from './main.jsx'
+import Users from '../pages/users.jsx'
 
 export default function Layout(){
     function openNav() {
@@ -10,9 +11,10 @@ export default function Layout(){
     return (
         <>
             <Drawer/>
-            <div id="main" className={styles.main}>
-                <button onClick={openNav}>Open</button>
-            </div>
+            <Main>
+                <button onClick={openNav} className='button'>Open</button>
+                <Users/>
+            </Main>    
         </>
     )
 }

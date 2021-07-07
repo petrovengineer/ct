@@ -2,7 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  entry: './app/app.jsx',
+  entry: ["@babel/polyfill", './app/app.jsx'],
   mode: 'development',
   output: {
     path: path.resolve(__dirname, './public'),
@@ -12,19 +12,39 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     port: 8080,
-    open: true,
+    // open: true,
     hot: true
   },
   module: {
     rules: [
       {
         test: /\.s[ac]ss$/,
+          exclude: /\.module\.scss$/,
+          use: [
+          { loader: 'style-loader' },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: {
+                compileType: 'icss'
+              }
+            }
+          },
+          'sass-loader'
+        ]
+      },
+      {
+        test: /\.module\.s[ac]ss$/,
         use: [
           { loader: 'style-loader' },
           {
             loader: 'css-loader',
             options: {
-              modules: true
+              importLoaders: 1,
+              modules: {
+                compileType: 'module'
+              }
             }
           },
           'sass-loader'
@@ -32,11 +52,15 @@ module.exports = {
       },
       {
           test: /\.jsx?$/,
-          exclude: /(node_modules)/,
-          loader: "babel-loader",   // определяем загрузчик
-          options:{
-              presets:["@babel/preset-env", "@babel/preset-react"]    // используемые плагины
-          }
+          // exclude: /(node_modules)/,
+          loader: "babel-loader",
+          // options:{
+          //   assumptions: {
+          //     "setPublicClassFields": true
+          //   },
+          //   plugins: ["@babel/plugin-proposal-decorators", {legacy: true, decoratorsBeforeExport: true} ],
+          //   presets:["@babel/preset-env", "@babel/preset-react"],
+          // }
       }
     ]
   },
