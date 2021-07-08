@@ -15,7 +15,7 @@ Content-Type: application/json
 {
     "query":"mutation reg($name: String, $secondName: String, $email: String!, $password: String){reg(name: $name, secondName: $secondName, email: $email, password: $password) {name}}",
     "variables":{
-        "email":"petrovengineer@gmail.com"
+        "email":"petrovengineer2@gmail.com"
     }
 }
 

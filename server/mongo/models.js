@@ -4,7 +4,6 @@ module.exports = {
     User: mongoose.model('User', 
     { 
         name: {type: String},
-        secondName: {type: String},
         email: {type: String},
         password: String,
         refreshToken: String,

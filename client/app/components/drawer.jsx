@@ -6,19 +6,41 @@ export default function Drawer(){
     useEffect(()=>{
         if(drawer){
             document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("mySidenav").style.padding = "20px";
             document.getElementById("main").style.marginLeft = "250px";
         }else{
             document.getElementById("mySidenav").style.width = "60px";
+            document.getElementById("mySidenav").style.padding = "20px 0px 20px 60px";
             document.getElementById("main").style.marginLeft = "60px";
         }
     }, [drawer])
     return (
-        <div id="mySidenav" className={s.sidenav}>
-            <a href="#" className={s.closebtn} onClick={()=>{setDrawer(!drawer)}}>&times;</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
-        </div>
+            <aside class="menu" id="mySidenav" className={s.sidenav}>
+                <span className={s.closebtn} onClick={()=>{setDrawer(!drawer)}}>&times;</span>
+                <p class="menu-label">
+                    General
+                </p>
+                <ul class="menu-list">
+                    <li><a>Dashboard</a></li>
+                    <li><a>Customers</a></li>
+                </ul>
+                <p class="menu-label">
+                    Administration
+                </p>
+                <ul class="menu-list">
+                    <li><a>Team Settings</a></li>
+                    <li>
+                    <a class="is-active">Manage Your Team</a>
+                    <ul>
+                        <li><a>Members</a></li>
+                        <li><a>Plugins</a></li>
+                        <li><a>Add a member</a></li>
+                    </ul>
+                    </li>
+                    <li><a>Invitations</a></li>
+                    <li><a>Cloud Storage Environment Settings</a></li>
+                    <li><a>Authentication</a></li>
+                </ul>
+            </aside>
     )
 }

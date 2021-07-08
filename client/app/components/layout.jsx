@@ -2,33 +2,24 @@ import React, { useEffect } from 'react'
 import Drawer from './drawer.jsx'
 import Main from './main.jsx'
 import Users from '../pages/users.jsx'
-import Login from '../pages/login.jsx'
+import Welcome from '../pages/welcome.jsx'
 import { observer } from 'mobx-react'
 import IamStore from '../store/iam'
 import NavBar from './navbar.jsx'
 
 const Layout = observer(()=>{
-    const {iam, whoAmI} = IamStore;
+    const {iam, whoAmI, exit} = IamStore;
     useEffect(()=>{
         const token = localStorage.getItem('token')
         if(token) whoAmI();
     }, [])
-    if(!iam) return <Login/>
+    if(!iam) return <Welcome/>
     return (
         <>
             <Drawer/>
             <Main>
-                <NavBar iam={iam}/>
-                {/* <span class="icon-text">
-                    <span>{iam.name} {iam.secondName}</span>
-                    <span class="icon" style={{color: 'gray'}}>
-                        <i class="fas fa-sign-out-alt"></i>
-                    </span>
-                </span> */}
-
-                <section className="section">
-                    <Users/>
-                </section>
+                <NavBar iam={iam} exit={exit}/>
+                <Users/>
             </Main>    
         </>
     )

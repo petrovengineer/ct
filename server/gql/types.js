@@ -6,7 +6,6 @@ const UserType = new GraphQLObjectType({
     fields: ()=>({
       _id: {type: new GraphQLNonNull(GraphQLString)},
       name: {type: GraphQLString},
-      secondName: {type: GraphQLString},
       email: {type: GraphQLString},
       refreshToken: {type: GraphQLString}
     })
@@ -14,10 +13,18 @@ const UserType = new GraphQLObjectType({
 
   const LoginResponseType = new GraphQLObjectType({
     name: "LoginResponseType",
-    description: "Return Token",
+    description: "Return Token after Login",
     fields: ()=>({
       accessToken: {type: GraphQLString}
     })
   })
 
-module.exports = {UserType, LoginResponseType};
+  const RegResponseType = new GraphQLObjectType({
+    name: "RegResponseType",
+    description: "Return Token after Reg",
+    fields: ()=>({
+      accessToken: {type: GraphQLString}
+    })
+  })
+
+module.exports = {UserType, LoginResponseType, RegResponseType};

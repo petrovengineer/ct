@@ -1,42 +1,39 @@
 import React from 'react'
+import IamStore from '../store/iam.js'
 
-const NavBar = ({iam})=>{
+const NavBar = ({iam, exit})=>{
+    // console.log("IAM ", iam)
+    // const {exit} = IamStore
+    function onExit(){
+        exit();
+    }
     return (
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item">
-                        Home
-                    </a>
-
-                    <a class="navbar-item">
-                        Documentation
-                    </a>
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <a class="navbar-link">
-                                {iam.name} {iam.secondName}
+            <>
+                <div class="dropdown is-hoverable">
+                    <div class="dropdown-trigger p-4">
+                        <a aria-haspopup="true" aria-controls="dropdown-menu">
+                            <span>{iam.name}</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+                            <a href="#" class="dropdown-item">
+                                Сменить пароль
                             </a>
-                            <div class="navbar-dropdown">
-                                <a class="navbar-item">
-                                    About
-                                </a>
-                                <a class="navbar-item">
-                                    Jobs
-                                </a>
-                                <hr class="navbar-divider"/>
-                                <a class="navbar-item">
-                                    Exit
-                                </a>
-                            </div>
+                            <hr class="dropdown-divider"/>
+                            <a href="#" class="dropdown-item" onClick={()=>{exit()}}>
+                                Выход
+                                <span class="icon" style={{color: 'gray'}}>
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </span>
+                            </a>
                         </div>
-                </div>
-
-                <div class="navbar-end">
-                    
-                </div>
-                </div>
-            </div>
-        </nav>
+                    </div>
+                    </div>
+            </>
     )
 }
 

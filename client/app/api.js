@@ -15,8 +15,11 @@ export default (query, variables)=>{
         axios.post('http://localhost:3000',{"query":query, "variables":variables})
         .then((response)=>{
             done(response.data.data)
+            console.log("RESP", response)
         })
         .catch((e)=>{
+            console.log("ERR", e)
+
             if(e.response && e.response.data && Array.isArray(e.response.data.errors)){
                 console.log("ERROR ",e.response.data.errors[0].message);
             }
