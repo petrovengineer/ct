@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import IamStore from '../store/iam.js'
+import IamStore from '../../store/iam.js'
 
 const Login = ()=>{
     const [email, setEmail] = useState('petrovengineer@gmail.com')

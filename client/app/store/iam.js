@@ -42,12 +42,22 @@ class Iam {
         this.iam = null;
     }
     whoAmI = () => {
-            api("query{user{name}}")
+            api("query{user{_id name}}")
             .then(action((data)=>{
                 this.iam = data.user;
             }))
         }
+    get shortName(){
+        if(this.iam){
+            const arr = this.iam.name.split(" ")
+            let result = arr[0];
+            if(arr[1]) result += " " + arr[1][0] +". ";
+            if(arr[2]) result += arr[2][0] + ".";
+            return result;
+        }
+        else return null
     }
+}
 
 
 const IamStore = new Iam()

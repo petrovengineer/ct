@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import s from '../styles/drawer.module.scss'
+import {Link} from 'react-router-dom'
+import Iam from './iam.jsx'
 
 export default function Drawer(){
     const [drawer, setDrawer] = useState(true)
@@ -15,32 +17,48 @@ export default function Drawer(){
         }
     }, [drawer])
     return (
-            <aside className="menu" id="mySidenav" className={s.sidenav}>
+            <aside id="mySidenav" className={s.sidenav+ ' has-background-link-light'}>
+                <Iam/>
                 <span className={s.closebtn} onClick={()=>{setDrawer(!drawer)}}>&times;</span>
-                <p className="menu-label">
-                    General
-                </p>
-                <ul className="menu-list">
-                    <li><a>Dashboard</a></li>
-                    <li><a>Customers</a></li>
-                </ul>
-                <p className="menu-label">
-                    Administration
-                </p>
-                <ul className="menu-list">
-                    <li><a>Team Settings</a></li>
-                    <li>
-                    <a className="is-active">Manage Your Team</a>
-                    <ul>
-                        <li><a>Members</a></li>
-                        <li><a>Plugins</a></li>
-                        <li><a>Add a member</a></li>
-                    </ul>
-                    </li>
-                    <li><a>Invitations</a></li>
-                    <li><a>Cloud Storage Environment Settings</a></li>
-                    <li><a>Authentication</a></li>
-                </ul>
+                {menu.map(group=>(
+                    <div  key={group._id} className="mt-4">
+                        <p className="menu-label">
+                            {group.title}
+                        </p>
+                        <Items items={group.items}/>
+                    </div>    
+                ))}
             </aside>
     )
 }
+
+const Items = ({items})=>{
+        return <ul className="menu-list">
+            {items.map(item=>(
+                <li key={item._id}>
+                    <Link to={item.link}>{item.name}</Link>
+                    {Array.isArray(item.items) && <Items items={item.items}/>}
+                </li>
+            ))}
+        </ul>
+}
+
+const menu = [
+    {_id: 'g1', title: 'Эксплуатация', items: 
+        [
+            {_id:'e1', name: 'Неисправности', link: '/breakdowns'},
+            {_id:'e2', name: 'Замечания', link: '/observations'},
+            {_id:'e3', name: 'Отчёты', link: '/reports'},
+        ]
+    },
+    {_id:'g2', title: 'Системы', items: [
+        {_id:'s1', name:'Противопожарная защита', link: '/systems/appz'},
+        {_id:'s2', name:'Вентиляция', link: '/systems/vent'},
+    ]},
+    {_id: 'g3', title: 'Администрирование', items:
+        [
+            {_id:'a1', name: 'Пользователи', link: '/users'},
+            {_id:'a2', name: 'Меню', link: '/menu'},
+        ]
+    }
+]

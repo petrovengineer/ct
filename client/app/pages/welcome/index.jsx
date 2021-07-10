@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { observer } from 'mobx-react'
-import Login from '../components/login.jsx'
-import Reg from '../components/reg.jsx'
+import Login from './login.jsx'
+import Reg from './reg.jsx'
 
 const WelcomePage = observer(()=>{
     const [login, showLogin] = useState(true)

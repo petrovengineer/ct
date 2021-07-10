@@ -1,18 +1,18 @@
 import React from 'react'
 import IamStore from '../store/iam.js'
+import { observer } from 'mobx-react';
 
-const NavBar = ({iam, exit})=>{
-    // console.log("IAM ", iam)
-    // const {exit} = IamStore
+const NavBar = observer(()=>{
+    const {exit, shortName} = IamStore
     function onExit(){
         exit();
     }
     return (
             <>
                 <div className="dropdown is-hoverable">
-                    <div className="dropdown-trigger p-4">
-                        <a aria-haspopup="true" aria-controls="dropdown-menu">
-                            <span>{iam.name}</span>
+                    <div className="dropdown-trigger">
+                        <a aria-haspopup="true" aria-controls="dropdown-menu" className="p-0">
+                            <span>{shortName}</span>
                         </a>
                     </div>
                     <div className="dropdown-menu" id="dropdown-menu" role="menu">
@@ -32,6 +32,6 @@ const NavBar = ({iam, exit})=>{
                     </div>
             </>
     )
-}
+})
 
 export default NavBar;

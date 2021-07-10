@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import IamStore from '../store/iam.js'
+import IamStore from '../../store/iam.js'
 
 const Reg = ()=>{
     const [name, setName] = useState('Иванов Иван Иванович')
