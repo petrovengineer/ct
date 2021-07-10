@@ -9,25 +9,22 @@ const NavBar = ({iam, exit})=>{
     }
     return (
             <>
-                <div class="dropdown is-hoverable">
-                    <div class="dropdown-trigger p-4">
+                <div className="dropdown is-hoverable">
+                    <div className="dropdown-trigger p-4">
                         <a aria-haspopup="true" aria-controls="dropdown-menu">
                             <span>{iam.name}</span>
-                            <span class="icon is-small">
-                                <i class="fas fa-angle-down" aria-hidden="true"></i>
-                            </span>
                         </a>
                     </div>
-                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                        <div class="dropdown-content">
-                            <a href="#" class="dropdown-item">
+                    <div className="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div className="dropdown-content">
+                            <a href="#" className="dropdown-item">
                                 Сменить пароль
                             </a>
-                            <hr class="dropdown-divider"/>
-                            <a href="#" class="dropdown-item" onClick={()=>{exit()}}>
+                            <hr className="dropdown-divider"/>
+                            <a href="#" className="dropdown-item" onClick={()=>{exit()}}>
                                 Выход
-                                <span class="icon" style={{color: 'gray'}}>
-                                    <i class="fas fa-sign-out-alt"></i>
+                                <span className="icon" style={{color: 'gray'}}>
+                                    <i className="fas fa-sign-out-alt"></i>
                                 </span>
                             </a>
                         </div>

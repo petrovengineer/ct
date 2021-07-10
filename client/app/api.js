@@ -14,12 +14,13 @@ export default (query, variables)=>{
     return new Promise((done, fail)=>{
         axios.post('http://localhost:3000',{"query":query, "variables":variables})
         .then((response)=>{
-            done(response.data.data)
-            console.log("RESP", response)
+            if(Array.isArray(response.data.errors) && response.data.errors.length>0){
+                return fail(response.data.errors[0].message);
+            }
+            done(response.data.data);
         })
         .catch((e)=>{
-            console.log("ERR", e)
-
+            console.log("ERROR: ", e)
             if(e.response && e.response.data && Array.isArray(e.response.data.errors)){
                 console.log("ERROR ",e.response.data.errors[0].message);
             }

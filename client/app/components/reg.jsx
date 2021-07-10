@@ -8,45 +8,45 @@ const Reg = ()=>{
     const [password2, setPassword2] = useState('1212')
     return (
         <>
-            <div class="field">
-                <p class="control">
-                    <input class="input is-static" type="email" value="Фамилия Имя Отчество (полностью)" readonly/>
+            <div className="field">
+                <p className="control">
+                    <input className="input is-static" type="email" value="Фамилия Имя Отчество (полностью)" readOnly/>
                 </p>
-                <p class="control has-icons-right">
-                    <input class="input" type="email" 
+                <p className="control has-icons-right">
+                    <input className="input" type="email" 
                     value={name} onChange={(e)=>{setName(e.target.value)}}/>
                 </p>
             </div>
-            <div class="field">
-                <p class="control">
-                    <input class="input is-static" type="email" value="Адрес электронной почты" readonly/>
+            <div className="field">
+                <p className="control">
+                    <input className="input is-static" type="email" value="Адрес электронной почты" readOnly/>
                 </p>
-                <p class="control has-icons-right">
-                    <input class="input" type="email"
+                <p className="control has-icons-right">
+                    <input className="input" type="email"
                     value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
                 </p>
             </div>
-            <div class="field">
-                <p class="control">
-                    <input class="input is-static" type="email" value="Пароль" readonly/>
+            <div className="field">
+                <p className="control">
+                    <input className="input is-static" type="email" value="Пароль" readOnly/>
                 </p>
-                <p class="control ">
-                    <input class="input" type="password"
+                <p className="control ">
+                    <input className="input" type="password"
                     value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
                 </p>
             </div>
-            <div class="field">
-                <p class="control">
-                    <input class="input is-static" type="email" value="Повторите пароль" readonly/>
+            <div className="field">
+                <p className="control">
+                    <input className="input is-static" type="email" value="Повторите пароль" readOnly/>
                 </p>
-                <p class="control ">
-                    <input class="input" type="password"
+                <p className="control ">
+                    <input className="input" type="password"
                     value={password2} onChange={(e)=>{setPassword2(e.target.value)}}/>
                 </p>
             </div>
-            <div class="field">
-                <p class="control">
-                    <button class="button is-info" onClick={()=>{IamStore.reg({name, email, password})}}>
+            <div className="field">
+                <p className="control">
+                    <button className="button is-info" onClick={()=>{IamStore.reg({name, email, password})}}>
                         Зарегистрироваться
                     </button>
                 </p>

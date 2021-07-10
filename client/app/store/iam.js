@@ -1,5 +1,6 @@
-import {action, makeAutoObservable, configure  } from 'mobx'
+import {action, makeAutoObservable} from 'mobx'
 import api from '../api';
+import InfoStore from './info';
 
 class Iam {
     iam = null;
@@ -14,12 +15,12 @@ class Iam {
         const variables = {email, password}
         api(query, variables)
         .then(action((data)=>{
-            if(data.login.accessToken){
+            if(data.login && data.login.accessToken){
                 localStorage.setItem('token', data.login.accessToken)
                 this.whoAmI()
             }
         }))
-        .catch((e)=>{})
+        .catch((e)=>{InfoStore.addMessage({message:e, type:'error'})})
         .finally(action(()=>{this.isLoading = false}))
     }
     reg = ({name = "Новый", email, password})=>{
