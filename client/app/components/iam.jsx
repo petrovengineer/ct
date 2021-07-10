@@ -23,13 +23,13 @@ const NavBar = observer(()=>{
                             <hr className="dropdown-divider"/>
                             <a href="#" className="dropdown-item" onClick={()=>{exit()}}>
                                 Выход
-                                <span className="icon" style={{color: 'gray'}}>
+                                {/* <span className="icon" style={{color: 'gray'}}>
                                     <i className="fas fa-sign-out-alt"></i>
-                                </span>
+                                </span> */}
                             </a>
                         </div>
                     </div>
-                    </div>
+                </div>
             </>
     )
 })

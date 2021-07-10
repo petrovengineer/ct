@@ -7,6 +7,7 @@ import { observer } from 'mobx-react'
 import IamStore from './store/iam'
 import NavBar from './components/iam.jsx'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
+import Breakdowns from './pages/breakdowns'
 
 const Layout = observer(()=>{
     const {iam, whoAmI, exit} = IamStore;
@@ -22,6 +23,9 @@ const Layout = observer(()=>{
                 <Switch>
                     <Route path="/users">
                         <Users/>
+                    </Route>
+                    <Route path="/breakdowns">
+                        <Breakdowns/>
                     </Route>
                     <Route path="/">
                         <Users/>
