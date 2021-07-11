@@ -7,7 +7,7 @@ const Breakdowns = ()=>{
         <>
             <TopBar/>
             {breakdowns.map(b=>(
-                <Breakdown breakdown={b}/>
+                <Breakdown breakdown={b} key={b._id}/>
             ))}
         </>
     )

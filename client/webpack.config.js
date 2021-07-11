@@ -65,12 +65,16 @@ module.exports = {
         use: [
           {
             loader: 'file-loader',
-            // options: {
-            //   name: '[name].[ext]',
-            //   outputPath: 'fonts/'
-            // }
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
           }
         ]
+      },
+      {
+        test: /\.(png|svg|jpg|gif|ico)$/,
+        use: ['file-loader?name=[name].[ext]']
       },
       {
           test: /\.jsx?$/,
@@ -81,6 +85,7 @@ module.exports = {
   plugins: [new HtmlWebpackPlugin({
       title: 'Claim Tracker',
       filename: 'index.html',
-      template: 'app/template.html'
+      template: 'app/template.html',
+      favicon: "app/favicon.ico"
   })],
 };

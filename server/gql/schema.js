@@ -14,7 +14,7 @@ const MutationRootType = new GraphQLObjectType({
   name: 'MutationRootType',
   description: 'Do mutation:/',
   fields: ()=>({
-    ...userMutations
+    ...userMutations,
   })
 })
 

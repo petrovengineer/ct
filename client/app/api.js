@@ -28,3 +28,16 @@ export default (query, variables)=>{
         })
     })
 }
+
+function upload(file){
+    return new Promise((done, fail)=>{
+            var formData = new FormData();
+            formData.append("file", file);
+            axios.post('http://localhost:3000/upload', formData, 
+                {headers: {'Content-Type': 'multipart/form-data'}
+            }).then((res)=>{
+                done();
+            }).catch((e)=>{fail(); console.log("ERROR ", e);})
+        })}
+
+export {upload}

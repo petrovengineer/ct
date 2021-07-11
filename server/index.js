@@ -11,13 +11,24 @@ const app = express();
 var cors = require('cors');
 app.use(cors());
 
+const { graphqlUploadExpress } = require('graphql-upload');
+
 const {authenticateToken} = require('./auth')
 app.use(authenticateToken);
 
-app.use('/', graphqlHTTP({
-  schema: schema,
-  graphiql: true
-}));
+app.post('/', 
+  graphqlHTTP({
+    schema: schema,
+    graphiql: true
+  }));
+
+var multer = require('multer');
+var upload = multer({ dest: './temp/', limits: {
+    fileSize: 10 * 1024 * 1024,
+}});
+const uploadImage = require('./upload')
+
+app.post('/upload', upload.single('file'), uploadImage)
 
 app.listen(port);
 console.log('GraphQL API server running at localhost:'+ port);
@@ -25,7 +36,8 @@ console.log('GraphQL API server running at localhost:'+ port);
 // var AWS = require("aws-sdk");
 
 // var AWS = require('aws-sdk');
-// var uuid = require('uuid');
+
+// AWS.config.loadFromPath('./credentials.json');
 
 // var bucketName = 'claimtracker';
 // var keyName = 'hello_world_NEW1.txt';

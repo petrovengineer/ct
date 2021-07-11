@@ -10,9 +10,13 @@ const Info = observer(()=>{
                 <div className="modal is-active" key={info.message}>
                     <div className="modal-background" onClick={()=>{removeMessage(i)}}></div>
                     <div className="modal-content">
-                        <div className={"panel m-4 " + (info.type === "error"?"is-danger": "")}>
+                        <div className={"panel m-4 " + (info.type === "error"?"is-danger"
+                        :info.type === "success"?"is-success":"")}>
                             <p className="panel-heading">
-                                {info.type === "error"?"Ошибка!": undefined}
+                                {
+                                    info.type === "error"?"Ошибка!": 
+                                    info.type === "success"?"Успешно": undefined
+                                }
                             </p>
                             <div className="panel-block" style={{backgroundColor:'white'}}>
                                 {info.message}
