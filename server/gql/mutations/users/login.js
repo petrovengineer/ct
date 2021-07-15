@@ -15,8 +15,9 @@ module.exports = {
         if(!email || !password){throw new Error('Email or password was not providet!')}
         const user = await User.findOne({email});
         if(!user) throw new Error('User not found!')
+        console.log("LOGIN ", user._id, user.name)
         if(await bcrypt.compare(password, user.password)){
-            const accessToken = jwt.sign({email}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '7d'});
+            const accessToken = jwt.sign({_id: user._id, name: user.name}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '7d'});
             return {accessToken}
         }else throw new Error('Password wrong!')
       }

@@ -17,8 +17,8 @@ const uploadImage =  async (req, res)=>{
         const dir = now.getFullYear() + '_' + (Number.parseInt(now.getMonth())+1) + '_' + now.getDate();
         const name = now.getHours()+'_'+now.getMinutes()+'_'+uuidv4()+'.jpg';
         const fullPath = dir+'/'+name;
-
         var bucketName = 'claimtracker';
+        const link = `https://${bucketName}.s3.us-east-2.amazonaws.com/${fullPath}`;
 
         var objectParams = {Bucket: bucketName, 
             Key: fullPath, 
@@ -28,7 +28,7 @@ const uploadImage =  async (req, res)=>{
         var uploadPromise = new AWS.S3({apiVersion: '2006-03-01'}).putObject(objectParams).promise();
         uploadPromise.then(
         ()=>{
-            console.log("Uploaded", `https://${bucketName}.s3.us-east-2.amazonaws.com/${fullPath}`)
+            console.log("Uploaded", link)
         }).catch((e)=>{
             console.log("Error upload to S3 ", e)
         })

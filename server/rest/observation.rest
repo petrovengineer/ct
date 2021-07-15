@@ -1,0 +1,22 @@
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGUzNmViNzk0OTM0MDE2MTgyZTJkY2UiLCJuYW1lIjoi0J_QtdGC0YDQvtCyINCf0LDQstC10Lsg0KHQtdGA0LPQtdC10LLQuNGHIiwiaWF0IjoxNjI2Mjk5MTk0LCJleHAiOjE2MjY5MDM5OTR9.AsF50TizSoO2tlqWHS7D9gu5WOQomMDLreEkN4-mwrU
+
+###
+POST http://localhost:3000/
+Content-Type: application/json
+Authorization: Basic {{token}}
+
+{
+    "query":"mutation createObservation($text: String, $time: String){createObservation(text: $text, time: $time) {text author{_id name}}}",
+    "variables":{
+        "text":"First observation..."
+    }
+}
+
+###
+POST http://localhost:3000/
+Content-Type: application/json
+Authorization: Basic {{token}}
+
+{
+    "query":"query{getObservations{text time}}"
+}

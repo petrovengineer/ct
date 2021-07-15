@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBldHJvdmVuZ2luZWVyQGdtYWlsLmNvbSIsImlhdCI6MTYyNTUyNDExMiwiZXhwIjoxNjI2MTI4OTEyfQ.WbU6Lh-kdBeXcCrwjSa8xu3oBYx7pTRJTTphN0t1eE0
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGUzNmViNzk0OTM0MDE2MTgyZTJkY2UiLCJuYW1lIjoi0J_QtdGC0YDQvtCyINCf0LDQstC10Lsg0KHQtdGA0LPQtdC10LLQuNGHIiwiaWF0IjoxNjI2Mjk5MTk0LCJleHAiOjE2MjY5MDM5OTR9.AsF50TizSoO2tlqWHS7D9gu5WOQomMDLreEkN4-mwrU
 
 ###
 POST http://localhost:3000/
@@ -37,5 +37,5 @@ Content-Type: application/json
 Authorization: Basic {{token}}
 
 {
-    "query":"query{user{name secondName}}"
+    "query":"query{user{name}}"
 }

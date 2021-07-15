@@ -1,12 +1,15 @@
 let {GraphQLObjectType, GraphQLSchema} = require('graphql')
 let userQueries = require('./queries/users')
+let observationQueries = require('./queries/observations')
 let userMutations = require('./mutations/users')
+let observationMutations = require('./mutations/observation')
 
 const QueryRootType = new GraphQLObjectType({
   name: 'QueryRootType',
   description: "Get something:)",
   fields: ()=>({
-    ...userQueries
+    ...userQueries,
+    ...observationQueries
   })
 })
 
@@ -15,6 +18,7 @@ const MutationRootType = new GraphQLObjectType({
   description: 'Do mutation:/',
   fields: ()=>({
     ...userMutations,
+    ...observationMutations
   })
 })
 
