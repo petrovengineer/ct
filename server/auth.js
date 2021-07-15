@@ -11,7 +11,6 @@ function authenticateToken(req, res, next){
             req._id = user._id; 
             req.name = user.name; 
         }
-        // console.log("REQUEST INJECT ", req._id);
         next();
     })}
 }

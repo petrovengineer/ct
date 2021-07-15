@@ -8,6 +8,7 @@ import IamStore from './store/iam'
 import NavBar from './components/iam.jsx'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import Breakdowns from './pages/breakdowns'
+import Observations from './pages/observations'
 
 const Layout = observer(()=>{
     const {iam, whoAmI, exit} = IamStore;
@@ -26,6 +27,9 @@ const Layout = observer(()=>{
                     </Route>
                     <Route path="/breakdowns">
                         <Breakdowns/>
+                    </Route>
+                    <Route path="/observations">
+                        <Observations/>
                     </Route>
                     <Route path="/">
                         <Users/>

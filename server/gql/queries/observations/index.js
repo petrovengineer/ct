@@ -1,3 +1,3 @@
-const getObservations = require('./get');
+const observations = require('./get');
 
-module.exports = {getObservations}
+module.exports = {observations}

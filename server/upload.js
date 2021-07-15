@@ -4,9 +4,11 @@ const sharp = require('sharp');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 var AWS = require('aws-sdk');
+const {Observation} = require('./mongo/models')
 
 const uploadImage =  async (req, res)=>{
-    try{;
+    try{
+        console.log("REQ UPLOAD ", req.file, "ID ",req.body.oid)
         await sharp(fs.readFileSync(req.file.path))
         .resize(300)
         .toFile(path.resolve(__dirname, './temp/resized.jpg'));
@@ -26,14 +28,16 @@ const uploadImage =  async (req, res)=>{
             ACL:'public-read'
         };
         var uploadPromise = new AWS.S3({apiVersion: '2006-03-01'}).putObject(objectParams).promise();
-        uploadPromise.then(
-        ()=>{
-            console.log("Uploaded", link)
+        uploadPromise
+        .then(async ()=>{
+            console.log("Uploaded", link);
+            await Observation.updateOne({_id: req.body.oid}, {$push: {photos: link}})
+            res.sendStatus(200);
         }).catch((e)=>{
             console.log("Error upload to S3 ", e)
+            res.sendStatus(403)
         })
 
-        res.sendStatus(200);
     }catch(err){
         console.log(err);
         res.sendStatus(500);

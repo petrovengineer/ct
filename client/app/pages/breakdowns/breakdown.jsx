@@ -6,7 +6,9 @@ import InfoStore from '../../store/info'
 const Breakdown = ()=>{
     const uploadImage = ({target: { files }}) => {
         const file = files[0]
-        file && upload(file).then(()=>InfoStore.addMessage({type:'success', message: 'Изображение успешно загружено'})).catch((e)=>InfoStore.addMessage({type:'error', message: 'Ошибка сервера!'}))
+        file && upload(file)
+        .then(()=>InfoStore.addMessage({type:'success', message: 'Изображение успешно загружено'}))
+        .catch((e)=>InfoStore.addMessage({type:'error', message: 'Ошибка сервера!'}))
     }
     return (
         <div className="box">

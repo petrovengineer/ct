@@ -29,10 +29,12 @@ export default (query, variables)=>{
     })
 }
 
-function upload(file){
+function upload(file, oid){
     return new Promise((done, fail)=>{
             var formData = new FormData();
             formData.append("file", file);
+            formData.append("oid", oid);
+            console.log("FORM DATA ",oid)
             axios.post('http://localhost:3000/upload', formData, 
                 {headers: {'Content-Type': 'multipart/form-data'}
             }).then((res)=>{
