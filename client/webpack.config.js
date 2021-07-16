@@ -16,7 +16,12 @@ module.exports = {
     hot: true
   },
   resolve: {
-    extensions: ["", ".js", ".jsx"]
+    extensions: ["", ".js", ".jsx"],
+    alias: {
+      _components: path.resolve(__dirname, 'app/components/'),
+      _store: path.resolve(__dirname, 'app/store/'),
+      _pages: path.resolve(__dirname, 'app/pages/'),
+    }
   },
   module: {
     rules: [

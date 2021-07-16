@@ -32,7 +32,7 @@ const Layout = observer(()=>{
                         <Observations/>
                     </Route>
                     <Route path="/">
-                        <Users/>
+                        <Observations/>
                     </Route>
                 </Switch>
                 {/* <NavBar iam={iam} exit={exit}/> */}

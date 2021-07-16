@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Observation from './observation';
 import OStore from '../../store/observations'
 import {observer} from 'mobx-react'
+import TopBar from './top';
 
 const Observations = observer(()=>{
     const {observations, getObservations, isLoading} = OStore;
@@ -11,7 +12,7 @@ const Observations = observer(()=>{
     if(isLoading)return 'Loading...'
     return (
         <>
-            <h1 className="title">Наблюдения</h1>
+            <TopBar/>
             {observations.map((o,i)=>(
                 <Observation observation={o} key={o._id} index={i}/>
             ))}

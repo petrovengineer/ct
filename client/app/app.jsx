@@ -3,10 +3,10 @@ import React from 'react'
 import Layout from './layout.jsx'
 import Info from './components/info.jsx'
 
+import './styles/global.scss'
 import 'bulma/bulma.sass'
 import './styles/main.module.scss'
 import './styles/fontawesome/css/all.css'
-import './styles/global.scss'
 
 ReactDOM.render(<><Layout/><Info/></>, document.getElementById('app'));
 

@@ -9,10 +9,17 @@ class Observations {
     }
     getObservations = () => {
         this.isLoading = true;
-        api("query{observations{_id text time photos}}")
+        api("query getObservations($filter: FilterType){observations(filter: $filter){_id text time photos}}", {filter: {skip:0, limit: 10}})
         .then(action(({observations})=>{this.observations = observations}))
         .catch((e)=>{})
         .finally(action(()=>{this.isLoading = false}))
+    }
+    createObservation = (text, time) => {
+        api("mutation createObservation($text: String, $time: String){createObservation(text: $text, time: $time) {_id time text photos author{_id name}}}", 
+            {text, time})
+        .then(action(({createObservation: newObservation})=>{this.observations.unshift(newObservation)}))
+        .catch((e)=>{})
+        .finally(action(()=>{this.isLoading = false}))  
     }
     deleteImage = (link, oid, index) => {
         api("mutation deletePhoto($link: String, $oid: String){deletePhoto(link: $link, oid: $oid){_id text time photos}}", {link, oid})

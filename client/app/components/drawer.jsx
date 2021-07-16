@@ -46,19 +46,19 @@ const Items = ({items})=>{
 const menu = [
     {_id: 'g1', title: 'Эксплуатация', items: 
         [
-            {_id:'e1', name: 'Неисправности', link: '/breakdowns'},
+            // {_id:'e1', name: 'Неисправности', link: '/breakdowns'},
             {_id:'e2', name: 'Нарушения', link: '/observations'},
             {_id:'e3', name: 'Отчёты', link: '/reports'},
         ]
     },
-    {_id:'g2', title: 'Системы', items: [
-        {_id:'s1', name:'Противопожарная защита', link: '/systems/appz'},
-        {_id:'s2', name:'Вентиляция', link: '/systems/vent'},
-    ]},
-    {_id: 'g3', title: 'Администрирование', items:
-        [
-            {_id:'a1', name: 'Пользователи', link: '/users'},
-            {_id:'a2', name: 'Меню', link: '/menu'},
-        ]
-    }
+    // {_id:'g2', title: 'Системы', items: [
+    //     {_id:'s1', name:'Противопожарная защита', link: '/systems/appz'},
+    //     {_id:'s2', name:'Вентиляция', link: '/systems/vent'},
+    // ]},
+    // {_id: 'g3', title: 'Администрирование', items:
+    //     [
+    //         {_id:'a1', name: 'Пользователи', link: '/users'},
+    //         {_id:'a2', name: 'Меню', link: '/menu'},
+    //     ]
+    // }
 ]

@@ -9,12 +9,12 @@ module.exports = {
         text: {type: GraphQLString},
         time: {type: GraphQLString},
     },
-    resolve: async (_, {text, time}, {_id, name})=>{
+    resolve: async (_, {text, time = new Date()}, {_id, name})=>{
         if(!_id && !name)throw new Error('Auth failed!')
         const observation = new Observation({
             _id: new mongoose.Types.ObjectId(),
             text,
-            time: (time?new Date(time):new Date()),
+            time: new Date(time),
             author: {_id, name}
         })
         await observation.save()

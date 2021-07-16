@@ -14,6 +14,7 @@ module.exports = {
         text: {type: String},
         time:  {type: Date, default: Date.now},
         photos: {type: [String], default: []},
-        author: {_id:{type: String}, name:{type: String}}
+        author: {_id:{type: String}, name:{type: String}},
+        created:  {type: Date, default: Date.now}
     })
 }

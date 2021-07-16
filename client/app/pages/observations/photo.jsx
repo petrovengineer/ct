@@ -17,7 +17,7 @@ const Photo = observer(({photo, oid, index, showLarge})=>{
             <div id="img-back" className=""></div>
             <img style={{width:'160px', height:'120px'}} className="" src={photo}/>
 
-            {confirm && <Modal close={()=>showConfirm(false)}>
+            {confirm && <Modal close={()=>showConfirm(false)} contentStyle={{width:'auto'}}>
                 <div className="box">
                     <div className="mr-4 subtitle">Удалить фото?</div>
                     <button className="button is-danger mr-2" 

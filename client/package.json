@@ -34,9 +34,11 @@
     "@babel/polyfill": "^7.12.1",
     "axios": "^0.21.1",
     "bulma": "^0.9.3",
+    "date-fns": "^2.22.1",
     "mobx": "^6.3.2",
     "mobx-react": "^7.2.0",
     "react": "^17.0.2",
+    "react-datepicker": "^4.1.1",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0"
   }

@@ -1,4 +1,4 @@
-const { GraphQLObjectType, GraphQLString, GraphQLList } = require("graphql");
+const { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt } = require("graphql");
 
 
 const ObservationType = new GraphQLObjectType({
@@ -8,7 +8,7 @@ const ObservationType = new GraphQLObjectType({
         text: {type: GraphQLString},
         time: {type: GraphQLString,
             resolve: ({time})=>{
-                return new Date(time).toISOString()
+                return time.toISOString()
             }
         },
         photos: {type: new GraphQLList(GraphQLString)},
@@ -30,5 +30,7 @@ const AuthorType = new GraphQLObjectType({
         name: {type: GraphQLString},
     })
 })
+
+
 
 module.exports = ObservationType;

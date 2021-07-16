@@ -1,3 +1,13 @@
+@import 'react-datepicker/src/stylesheets/datepicker.scss';
+
+.date-peacker-custom-input{
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 140px;
+}
+
 #search-icon{
     display: none;
 }

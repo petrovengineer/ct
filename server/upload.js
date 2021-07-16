@@ -6,7 +6,6 @@ const {Observation} = require('./mongo/models')
 
 const uploadImage =  async (req, res)=>{
     try{
-        console.log("REQ UPLOAD ", req.file, "ID ",req.body.oid)
         await sharp(fs.readFileSync(req.file.path))
         .resize({width: 320, height: 240, fit: sharp.fit.inside, withoutEnlargement: true})
         .toFile(path.resolve(__dirname, './temp/resized.jpg'));
