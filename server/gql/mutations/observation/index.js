@@ -1,3 +1,4 @@
 const createObservation = require('./create')
+const deletePhoto = require('./deletePhoto')
 
-module.exports = {createObservation}
+module.exports = {createObservation, deletePhoto}

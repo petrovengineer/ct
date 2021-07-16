@@ -1,0 +1,45 @@
+#search-icon{
+    display: none;
+}
+#remove-icon{
+    display: none;
+}
+.img-increase:hover > #search-icon{
+    display: block;
+}
+.img-increase{
+    position: absolute;
+    left: 75px; 
+    top: 50px;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 1;
+
+}
+.img-remove{
+    position: absolute;
+    right: 10px; 
+    top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+.img-remove:hover > #remove-icon{
+    display: block;
+}
+.img-remove:hover ~ #img-back{
+    display: block;
+}
+.img-increase:hover ~ #img-back{
+    display: block;
+}
+#img-back{
+    background-color: black;
+    opacity: 0.4;
+    position: absolute;
+    left: 0px; 
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    display: none;
+}

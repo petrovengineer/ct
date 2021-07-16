@@ -6,7 +6,11 @@ const ObservationType = new GraphQLObjectType({
     fields: ()=>({
         _id: {type: GraphQLString},
         text: {type: GraphQLString},
-        time: {type: GraphQLString},
+        time: {type: GraphQLString,
+            resolve: ({time})=>{
+                return new Date(time).toISOString()
+            }
+        },
         photos: {type: new GraphQLList(GraphQLString)},
         author: {
             type: AuthorType,

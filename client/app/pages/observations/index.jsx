@@ -12,8 +12,8 @@ const Observations = observer(()=>{
     return (
         <>
             <h1 className="title">Наблюдения</h1>
-            {observations.map(o=>(
-                <Observation observation={o} key={o._id}/>
+            {observations.map((o,i)=>(
+                <Observation observation={o} key={o._id} index={i}/>
             ))}
         </>
     )

@@ -19,7 +19,7 @@ const Info = observer(()=>{
                                 }
                             </p>
                             <div className="panel-block" style={{backgroundColor:'white'}}>
-                                {info.message}
+                                <span className="p-4">{info.message}</span>
                             </div>
                         </div>
                     </div>

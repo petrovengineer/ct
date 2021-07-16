@@ -38,7 +38,7 @@ function upload(file, oid){
             axios.post('http://localhost:3000/upload', formData, 
                 {headers: {'Content-Type': 'multipart/form-data'}
             }).then((res)=>{
-                done();
+                done(res);
             }).catch((e)=>{fail(); console.log("ERROR ", e);})
         })}
 

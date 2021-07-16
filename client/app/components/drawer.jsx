@@ -47,7 +47,7 @@ const menu = [
     {_id: 'g1', title: 'Эксплуатация', items: 
         [
             {_id:'e1', name: 'Неисправности', link: '/breakdowns'},
-            {_id:'e2', name: 'Наблюдения', link: '/observations'},
+            {_id:'e2', name: 'Нарушения', link: '/observations'},
             {_id:'e3', name: 'Отчёты', link: '/reports'},
         ]
     },

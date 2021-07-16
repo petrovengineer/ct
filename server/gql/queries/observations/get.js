@@ -9,10 +9,6 @@ module.exports = {
     },
     resolve: async ()=>{
         const observations =  await Observation.find()
-        return observations.map(o=>{
-            const newO = Object.assign({}, o.toObject());
-            newO.time = (new Date(o.time).toISOString())
-            return newO;
-        })
+        return observations;
     }
 }
