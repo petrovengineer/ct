@@ -4,9 +4,6 @@ import { observer } from 'mobx-react';
 
 const NavBar = observer(()=>{
     const {exit, shortName} = IamStore
-    function onExit(){
-        exit();
-    }
     return (
             <>
                 <div className="dropdown is-hoverable">
@@ -21,7 +18,7 @@ const NavBar = observer(()=>{
                                 Сменить пароль
                             </a>
                             <hr className="dropdown-divider"/>
-                            <a href="#" className="dropdown-item" onClick={()=>{exit()}}>
+                            <a href="#" className="dropdown-item" onClick={exit}>
                                 Выход
                                 {/* <span className="icon" style={{color: 'gray'}}>
                                     <i className="fas fa-sign-out-alt"></i>

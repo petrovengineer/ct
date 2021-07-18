@@ -6,6 +6,7 @@ class Iam {
     iam = null;
     isLoading = false;
     successReg = false;
+    getting = true;
     constructor() {
         makeAutoObservable(this)
     }
@@ -45,8 +46,12 @@ class Iam {
             api("query{user{_id name}}")
             .then(action((data)=>{
                 this.iam = data.user;
+                this.getting = false;
             }))
         }
+    got = () => {
+        this.getting = false;
+    }
     get shortName(){
         if(this.iam){
             const arr = this.iam.name.split(" ")

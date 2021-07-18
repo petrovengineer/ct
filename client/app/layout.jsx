@@ -11,11 +11,13 @@ import Breakdowns from './pages/breakdowns'
 import Observations from './pages/observations'
 
 const Layout = observer(()=>{
-    const {iam, whoAmI, exit} = IamStore;
+    const {iam, whoAmI, getting, got} = IamStore;
     useEffect(()=>{
         const token = localStorage.getItem('token')
         if(token) whoAmI();
+        else got();
     }, [])
+    if(getting)return <div style={{width:'100%', height:'100%', backgroundColor:'red'}}></div>
     if(!iam) return <Welcome/>
     return (
         <BrowserRouter>
@@ -35,7 +37,6 @@ const Layout = observer(()=>{
                         <Observations/>
                     </Route>
                 </Switch>
-                {/* <NavBar iam={iam} exit={exit}/> */}
             </Main>    
         </BrowserRouter>
     )
