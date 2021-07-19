@@ -5,7 +5,7 @@ function formatDate(isoDate){
     const day = date.getDate();
     const hours = date.getHours();
     const minutes = date.getMinutes();
-    const result = addZero(day.toString()) + '.' + addZero(month.toString()) + '.' + year + ' ' 
+    const result = addZero(day.toString()) + '.' + addZero((month+1).toString()) + '.' + year + ' ' 
     + addZero(hours.toString()) + ':' + addZero(minutes.toString());;
     return result;
 }

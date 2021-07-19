@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import New from '_components/new'
 import ObservationsStore from '_store/observations'
+import Dates from './dates';
 
 const TopBar = ()=>{
     const [newForm, showNewForm] = useState(false);
@@ -10,12 +11,12 @@ const TopBar = ()=>{
         showNewForm(false);
     }
     return (
-        <nav className="navbar" role="navigation" aria-label="main navigation">
-            <div>
-                <div className="navbar-start">
-                    <button className="button is-link" onClick={()=>{showNewForm(true)}}>Добавить</button>
-                </div>
-                <div className="navbar-end"></div>
+        <nav className="top">
+            <div className="top-start">
+                <button className="button is-link" onClick={()=>{showNewForm(true)}}>Добавить</button>
+            </div>
+            <div className="top-end">
+                <Dates/>
             </div>
             {newForm && <New close={()=>{showNewForm(false)}} title={'Описание нарушения:'} onCreate={onCreate}/>}
         </nav>

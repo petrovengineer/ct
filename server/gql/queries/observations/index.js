@@ -1,3 +1,4 @@
 const observations = require('./get');
+const countObservations = require('./count');
 
-module.exports = {observations}
+module.exports = {observations, countObservations}

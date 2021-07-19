@@ -4,12 +4,39 @@ import api from '../api';
 class Observations {
     observations = []
     isLoading = false;
+    endDate = new Date();
+    startDate = new Date(this.endDate.getTime()-24*60*60*1000);
+    skip = 0;
+    limit = 10;
+    count = 0;
     constructor() {
         makeAutoObservable(this)
     }
-    getObservations = () => {
+    setSkip = (skip) => {
+        this.skip = skip;
+        this.getObservations();
+    }
+    setDateRange = ([startDate, endDate]) => {
+        this.startDate = startDate;
+        if(endDate!=null)endDate.setHours(23,59,59,999);
+        this.endDate = endDate;
+        if(endDate != null){
+            this.getObservations();
+            this.setSkip(0);
+        }
+    }
+    getObservations = async () => {
         this.isLoading = true;
-        api("query getObservations($filter: FilterType){observations(filter: $filter){_id text time photos}}", {filter: {skip:0, limit: 10}})
+        const filter =  {
+            skip: this.skip, 
+            limit: this.limit, 
+            startDate: this.startDate.toISOString(), 
+            endDate: this.endDate.toISOString(),
+        }
+        const resCount = await api("query count($filter: FilterType){countObservations(filter: $filter)}", {filter});
+        this.count = resCount.countObservations;
+        api("query count($filter: FilterType){observations(filter: $filter){_id text time photos}}", 
+        {filter})
         .then(action(({observations})=>{this.observations = observations}))
         .catch((e)=>{})
         .finally(action(()=>{this.isLoading = false}))

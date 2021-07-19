@@ -17,7 +17,7 @@ const Layout = observer(()=>{
         if(token) whoAmI();
         else got();
     }, [])
-    if(getting)return <div style={{width:'100%', height:'100%', backgroundColor:'red'}}></div>
+    if(getting)return <></>
     if(!iam) return <Welcome/>
     return (
         <BrowserRouter>
