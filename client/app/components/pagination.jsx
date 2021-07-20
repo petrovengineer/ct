@@ -8,7 +8,7 @@ const Pages = ({count, limit, skip, setSkip})=>{
         <nav className="pagination is-rounded mt-4" role="navigation" aria-label="pagination">
         <ul className="pagination-list">
             {(pages.length>1) && pages.map(p=>(
-                <li>
+                <li key={p}>
                     <a className={"pagination-link " + ((skip/limit)===p?"is-current":"")}
                     onClick={()=>setSkip(p*limit)}
                     aria-label="Page 1" aria-current="page">{p+1}</a>

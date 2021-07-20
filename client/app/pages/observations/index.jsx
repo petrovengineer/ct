@@ -7,9 +7,9 @@ import Pages from '../../components/pagination';
 import {action} from 'mobx';
 
 const Observations = observer(()=>{
-    const {observations, getObservations, isLoading, count, limit, skip, setSkip} = OStore;
-    useEffect(()=>{
-        getObservations();
+    const {observations, isLoading, count, filter:{limit, skip}, setSkip, fetchData} = OStore;
+    useEffect(async ()=>{
+        fetchData();
     },[])
     if(isLoading)return 'Loading...'
     return (
@@ -20,7 +20,7 @@ const Observations = observer(()=>{
                     <Observation observation={o} key={o._id} index={i}/>
                 ))}
             </div>
-            <Pages count={count} limit={limit} skip={skip} setSkip={action(()=>setSkip)}/>
+            <Pages count={count} limit={limit} skip={skip} setSkip={setSkip}/>
         </>
     )
 })

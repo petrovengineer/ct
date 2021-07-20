@@ -6,17 +6,18 @@ import {action} from 'mobx'
 import {observer} from 'mobx-react'
 
 const Dates = observer(() => {
-    const {startDate: startDateStore, endDate: endDateStore, setDateRange: setDateRangeStore} = ObservationStore;
+    // const {startDate: startDateStore, endDate: endDateStore, setDateRange: setDateRangeStore} = ObservationStore;
+    const {filter:{startDate, endDate}, setDateRange} = ObservationStore;
     return (
         <DatePicker
             dateFormat="dd.MM.yyyy"
             className="date-peacker-custom-input"
             // startDate={startDate}
-            startDate={startDateStore}
+            startDate={startDate}
             // endDate={endDate}
-            endDate={endDateStore}
+            endDate={endDate}
             onChange={action((update) => {
-                setDateRangeStore(update);
+                setDateRange(update);
             })}
             // showTimeInput
             // customTimeInput={<TimeInput />}

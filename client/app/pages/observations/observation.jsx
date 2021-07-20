@@ -4,7 +4,6 @@ import Photos from './photos'
 
 const Observation = ({observation, index})=>{
     const [photos, showPhotos] = useState(false)
-    console.log("RENDER ")
     return (
         <div className="box">
             <div className="icon-text">
