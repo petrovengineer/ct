@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 module.exports = {
     User: mongoose.model('User', 
     { 
@@ -15,6 +16,11 @@ module.exports = {
         time:  {type: Date, default: Date.now},
         photos: {type: [String], default: []},
         author: {_id:{type: String}, name:{type: String}},
+        created:  {type: Date, default: Date.now}
+    }),
+    Report: mongoose.model('Report',{
+        author: {_id:{type: String}, name:{type: String}},
+        observations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Observation'}],
         created:  {type: Date, default: Date.now}
     })
 }
