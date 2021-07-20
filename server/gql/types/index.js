@@ -1,4 +1,4 @@
-const usersTypes = require('./users');
+const usersTypes = require('./user');
 const observationTypes = require('./observation')
 const filterTypes = require('./filter')
 

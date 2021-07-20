@@ -1,5 +1,5 @@
 const {User} = require('../../../mongo/models')
-let {UserType} = require('../../types')
+let UserType = require('../../types/user')
 
 module.exports = {
     type: UserType,

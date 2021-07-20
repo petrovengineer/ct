@@ -1,5 +1,5 @@
 const { GraphQLString, GraphQLNonNull } = require('graphql')
-let {RegResponseType} = require('../../types')
+let {RegResponseType} = require('../../types/response')
 const mongoose = require('mongoose');
 const {User} = require('../../../mongo/models')
 const jwt = require('jsonwebtoken');

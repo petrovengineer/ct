@@ -18,5 +18,5 @@ Content-Type: application/json
 Authorization: Basic {{token}}
 
 {
-    "query":"query{getObservations{text time}}"
+    "query":"query{observations{text time author{_id name}}}"
 }

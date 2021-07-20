@@ -1,5 +1,5 @@
 const { GraphQLString } = require('graphql')
-let { LoginResponseType} = require('../../types')
+let { LoginResponseType} = require('../../types/response')
 const {User} = require('../../../mongo/models')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');

@@ -1,4 +1,4 @@
-let {UserType} = require('../../types')
+let UserType = require('../../types/user')
 let {GraphQLList, GraphQLString} = require('graphql')
 const {User} = require('../../../mongo/models')
 
