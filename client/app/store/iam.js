@@ -66,4 +66,6 @@ class Iam {
 
 
 const IamStore = new Iam()
+
+export {Iam}
 export default IamStore
