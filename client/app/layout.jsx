@@ -5,10 +5,9 @@ import Users from './pages/users.jsx'
 import Welcome from './pages/welcome/index.jsx'
 import { observer } from 'mobx-react'
 import IamStore from './store/iam'
-import NavBar from './components/iam.jsx'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
-import Breakdowns from './pages/breakdowns'
 import Observations from './pages/observations'
+import Reports from '_pages/reports'
 
 const Layout = observer(()=>{
     const {iam, whoAmI, getting, got} = IamStore;
@@ -27,11 +26,11 @@ const Layout = observer(()=>{
                     <Route path="/users">
                         <Users/>
                     </Route>
-                    <Route path="/breakdowns">
-                        <Breakdowns/>
-                    </Route>
                     <Route path="/observations">
                         <Observations/>
+                    </Route>
+                    <Route path="/reports">
+                        <Reports/>
                     </Route>
                     <Route path="/">
                         <Observations/>

@@ -37,7 +37,7 @@ class Observations {
         this.count = resCount.countObservations;
     }
     getObservations = async () => {
-        const {observations} = await api("query count($filter: FilterType){observations(filter: $filter){_id text time photos author{_id name}}}", 
+        const {observations} = await api("query observations($filter: FilterType){observations(filter: $filter){_id text time photos author{_id name}}}", 
         {filter: this.filter})
         this.observations = observations;
     }

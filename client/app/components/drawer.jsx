@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import s from '../styles/drawer.module.scss'
 import {Link} from 'react-router-dom'
 import Iam from './iam.jsx'
+import { useLocation } from 'react-router-dom'
 
 export default function Drawer(){
-    const [drawer, setDrawer] = useState(true)
+    const [drawer, setDrawer] = useState(true);
+    const location = useLocation();
     useEffect(()=>{
         if(drawer){
             document.getElementById("mySidenav").style.width = "250px";
@@ -36,7 +38,7 @@ const Items = ({items})=>{
         return <ul className="menu-list">
             {items.map(item=>(
                 <li key={item._id}>
-                    <Link to={item.link}>{item.name}</Link>
+                    <Link to={item.link} className={location.pathname===item.link?"is-active":undefined}>{item.name}</Link>
                     {Array.isArray(item.items) && <Items items={item.items}/>}
                 </li>
             ))}

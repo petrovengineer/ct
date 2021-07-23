@@ -1,13 +1,13 @@
-const {GraphQLObjectType, GraphQLString} = require('graphql')
+const {GraphQLObjectType, GraphQLString, GraphQLList} = require('graphql')
 const ObservationType = require('./observation')
 const UserType = require('./user')
 
-module.exports = {
+module.exports = new GraphQLObjectType({
     name: 'ReportType',
     fields: ()=>({
         _id: {type: GraphQLString},
         author: {type: UserType},
-        observations: [{type: ObservationType}],
+        observations: {type: new GraphQLList(ObservationType)},
         created: {type: GraphQLString,
             resolve: ({time})=>{
                 return time.toISOString()
@@ -15,4 +15,4 @@ module.exports = {
         },
         link: {type: GraphQLString}
     })
-}
+})

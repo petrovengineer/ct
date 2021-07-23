@@ -21,6 +21,7 @@ module.exports = {
       _components: path.resolve(__dirname, 'app/components/'),
       _store: path.resolve(__dirname, 'app/store/'),
       _pages: path.resolve(__dirname, 'app/pages/'),
+      _app: path.resolve(__dirname, 'app/'),
     }
   },
   module: {

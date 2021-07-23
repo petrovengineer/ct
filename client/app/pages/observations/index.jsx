@@ -4,7 +4,6 @@ import OStore from '../../store/observations'
 import {observer} from 'mobx-react'
 import TopBar from './top';
 import Pages from '../../components/pagination';
-import {action} from 'mobx';
 
 const Observations = observer(()=>{
     const {observations, isLoading, count, filter:{limit, skip}, setSkip, fetchData} = OStore;
