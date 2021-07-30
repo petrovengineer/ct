@@ -1,19 +1,14 @@
 import React, {useEffect} from 'react'
 import withReports from './withReports'
+import New from '_components/new'
 
-const Reports = ()=>{
-    const {reports, error, loading} = Store;
-
-    const {loading = false, error = null, reports = []} = withReports()
-    if(loading) return <h1 className="title has-text-primary">Loading...</h1>
-    if(error) return <h1 className="title has-text-danger">Error:(</h1>
+export default withReports(({loading, error, data})=>{
+    if(loading)return <div className="subtitle">Loading...</div>
+    if(error)return <div className="subtitle">Error:(</div>
     return (
-        <div>
-            {/* {reports.map(r=>(
-                <div key={r._id}>{r.author.name}</div>
-            ))} */}
-        </div>
+        <>
+            <div className="title">Отчёты</div>
+            
+        </>
     )
-}
-
-export default Reports
+})

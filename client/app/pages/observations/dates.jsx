@@ -16,9 +16,9 @@ const Dates = observer(() => {
             startDate={startDate}
             // endDate={endDate}
             endDate={endDate}
-            onChange={action((update) => {
+            onChange={(update) => {
                 setDateRange(update);
-            })}
+            }}
             // showTimeInput
             // customTimeInput={<TimeInput />}
             withPortal

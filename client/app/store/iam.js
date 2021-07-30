@@ -48,6 +48,7 @@ class Iam {
                 this.iam = data.user;
                 this.getting = false;
             }))
+            // .catch(e=>localStorage.removeItem('token'))
         }
     got = () => {
         this.getting = false;

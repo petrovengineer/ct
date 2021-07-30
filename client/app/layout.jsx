@@ -8,11 +8,12 @@ import IamStore from './store/iam'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import Observations from './pages/observations'
 import Reports from '_pages/reports'
+import store from '_store/observations'
 
 const Layout = observer(()=>{
     const {iam, whoAmI, getting, got} = IamStore;
     useEffect(()=>{
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem('token');
         if(token) whoAmI();
         else got();
     }, [])
@@ -27,7 +28,7 @@ const Layout = observer(()=>{
                         <Users/>
                     </Route>
                     <Route path="/observations">
-                        <Observations/>
+                        <Observations {...store}/>
                     </Route>
                     <Route path="/reports">
                         <Reports/>

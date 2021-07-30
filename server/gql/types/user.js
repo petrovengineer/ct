@@ -4,7 +4,7 @@ const UserType = new GraphQLObjectType({
     name: "UserType",
     description: "Represent an user",
     fields: ()=>({
-      _id: {type: new GraphQLNonNull(GraphQLString)},
+      _id: {type: (GraphQLString)},
       name: {type: GraphQLString},
       email: {type: GraphQLString},
       refreshToken: {type: GraphQLString}
