@@ -28,7 +28,7 @@ const Layout = observer(()=>{
                         <Users/>
                     </Route>
                     <Route path="/observations">
-                        <Observations {...store}/>
+                        <Observations/>
                     </Route>
                     <Route path="/reports">
                         <Reports/>

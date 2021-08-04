@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import New from '_components/new'
-import ObservationsStore from '_store/observations'
+import store from '_store/observations'
 import Dates from './dates';
 
-const TopBar = ()=>{
+const Top = ()=>{
     const [newForm, showNewForm] = useState(false);
-    const {createObservation} = ObservationsStore;
     const onCreate = (...args)=>{
-        createObservation(...args);
+        store.create(...args);
         showNewForm(false);
     }
     return (
@@ -23,4 +22,4 @@ const TopBar = ()=>{
     )
 }
 
-export default TopBar
+export default Top

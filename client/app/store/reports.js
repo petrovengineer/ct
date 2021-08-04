@@ -1,4 +1,4 @@
-import {action, makeAutoObservable  } from 'mobx'
+import {action, makeAutoObservable , makeObservable, observable } from 'mobx'
 
 class Reports{
     reports = undefined;
@@ -10,7 +10,16 @@ class Reports{
         endDate: new Date(),
     }
     constructor() {
-        makeAutoObservable(this)
+        // makeAutoObservable(this)
+        makeObservable(this, {
+            loading: observable,
+            reports: observable,
+            // setSkip: action,
+            // setDateRange: action,
+            setLoading: action,
+            // refresh: observable,
+            // setReports:action
+        })
         this.filter.startDate = new Date(this.filter.endDate.getTime()-24*60*60*1000)
     }
     setReports = (reports)=>{

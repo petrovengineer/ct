@@ -1,19 +1,19 @@
 import React, { useEffect } from 'react'
 import Observation from './observation';
-import store from '../../store/observations'
-import {observer} from 'mobx-react'
-import TopBar from './top';
+import Top from './top';
 import Pages from '../../components/pagination';
 import withObservations from './withObservations'
 
 const Observations = withObservations((props)=>{
-    const {loading, observations=[], count, filter={}, setSkip} = store;
+    const {loading, data, count, filter={}, setSkip, error} = props;
     if(loading)return <div className="subtitle">Loading...</div>
+    if(error)return <div className="subtitle has-text-danger">error</div>
     return (
         <>
-            <TopBar/>
+            <div className="title">Нарушения</div>
+            <Top/>
             <div className="mt-4">
-                {observations.map((o,i)=>(
+                {data && data.map((o,i)=>(
                     <Observation observation={o} key={o._id} index={i}/>
                 ))}
             </div>
