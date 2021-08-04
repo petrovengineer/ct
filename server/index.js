@@ -16,6 +16,10 @@ const { graphqlUploadExpress } = require('graphql-upload');
 const {authenticateToken} = require('./auth')
 app.use(authenticateToken);
 
+app.get('/',(req, res)=>{
+  return res.send('<h1>ClaimTracker</h1>')
+})
+
 app.post('/', 
   graphqlHTTP({
     schema: schema,
