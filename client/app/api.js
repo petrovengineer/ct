@@ -10,8 +10,9 @@ axios.interceptors.request.use(function (config) {
     return Promise.reject(error);
   });
 
+  const url = process.env.API;
+
 export default (query, variables)=>{
-    const url = process.env.API;
     return new Promise((done, fail)=>{
         axios.post(url ,{"query":query, "variables":variables})
         .then((response)=>{

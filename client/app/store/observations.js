@@ -73,9 +73,10 @@ class Observations {
         .finally(action(()=>{this.loading = false}))  
     }
     addItem = (item)=>{
-        const newData = [item, ...this.data];
-        this.data = newData;
-        // this.data.unshift(item);
+        // const newData = [item, ...this.data];
+        // this.data = newData;
+        this.data.unshift(item);
+        console.log(this.data)
     }
     deleteImage = (link, oid, index) => {
         api("mutation deletePhoto($link: String, $oid: String){deletePhoto(link: $link, oid: $oid){_id text time photos}}", {link, oid})

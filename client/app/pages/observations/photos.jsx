@@ -11,7 +11,7 @@ const Photos = ({photos= [], oid, index})=>{
         const file = files[0]
         file && upload(file, oid)
         .then((res)=>{ObservationsStore.addImage(res.data, index)})
-        .catch((e)=>InfoStore.addMessage({type:'error', message: 'Ошибка сервера!'}))
+        .catch((e)=>{InfoStore.addMessage({type:'error', message: 'Ошибка сервера!'}); console.log(e);})
     }
     const prev = ()=>{
         const index = photos.indexOf(large);
