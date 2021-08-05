@@ -76,3 +76,5 @@ typings/
 .fusebox/
 
 aws-config.json
+
+public/
