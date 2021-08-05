@@ -1,7 +1,17 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+const dotenv = require('dotenv')
 
 module.exports = (env) => {
+  const envFile = `${path.join(__dirname)}/.env${env.ENVIRONMENT==='production'?'':'.development'}`;
+  const envFromFile = dotenv.config({path:envFile}).parsed;
+  const envKeys = Object.keys(envFromFile).reduce((prev, next) => {
+    prev[`process.env.${next}`] = JSON.stringify(envFromFile[next]);
+    return prev;
+  }, {});
+  console.log("DEBUG ", envKeys)
+
   return {
     entry: ["@babel/polyfill", './app/app.jsx'],
     mode: 'development',
@@ -89,12 +99,15 @@ module.exports = (env) => {
         }
       ]
     },
-    plugins: [new HtmlWebpackPlugin({
+    plugins: [
+      new HtmlWebpackPlugin({
         title: 'Claim Tracker',
         filename: 'index.html',
         template: 'app/template.html',
         favicon: "app/favicon.ico"
-    })],
+      }),
+      new webpack.DefinePlugin(envKeys)
+    ],
   }
 }
 

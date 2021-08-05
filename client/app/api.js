@@ -11,8 +11,9 @@ axios.interceptors.request.use(function (config) {
   });
 
 export default (query, variables)=>{
+    const url = process.env.API;
     return new Promise((done, fail)=>{
-        axios.post('http://localhost:3000',{"query":query, "variables":variables})
+        axios.post(url ,{"query":query, "variables":variables})
         .then((response)=>{
             if(Array.isArray(response.data.errors) && response.data.errors.length>0){
                 return fail(response.data.errors[0].message);
@@ -35,7 +36,7 @@ function upload(file, oid){
             formData.append("file", file);
             formData.append("oid", oid);
             console.log("FORM DATA ",oid)
-            axios.post('http://localhost:3000/upload', formData, 
+            axios.post(`${url}/upload`, formData, 
                 {headers: {'Content-Type': 'multipart/form-data'}
             }).then((res)=>{
                 done(res);
