@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
 import DatePicker from 'react-datepicker'
 import ru from 'date-fns/locale/ru';
-import ObservationStore from '_store/observations'
-import {action} from 'mobx'
 import {observer} from 'mobx-react'
 
 const Dates = observer(({filter:{startDate, endDate}, setDateRange}) => {

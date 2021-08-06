@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import Dates from '_components/dates-range'
 import {formatDate} from '_app/time'
 import store from '_store/reports'
+import ru from 'date-fns/locale/ru';
+import DatePicker from 'react-datepicker'
 
 export default ({filter, setDateRange, data=[]})=>{
     const [checkList, setCheckList] = useState([])
@@ -29,12 +31,17 @@ export default ({filter, setDateRange, data=[]})=>{
             </div>
             <div className="field">
                 {data.map((item)=>(
-                    <label className="checkbox" key={item._id} >
-                        <input type="checkbox" checked={checkList.indexOf(item._id)>=0} onChange={()=>handleChange(item._id)}/>
-                        <span className="mx-2 has-text-link">{formatDate(item.time)}</span>
-                        <span>{item.text}</span>
-                    </label>
+                    <div>
+                        <label className="checkbox" key={item._id} >
+                            <input type="checkbox" checked={checkList.indexOf(item._id)>=0} onChange={()=>handleChange(item._id)}/>
+                            <span className="mx-2 has-text-link">{formatDate(item.time)}</span>
+                            <span>{item.text}</span>
+                        </label>
+                    </div>
                 ))}
+            </div>
+            <div className="field">
+
             </div>
             <div className="field">
                 <button className="button is-success" onClick={createReport}>Создать</button>
