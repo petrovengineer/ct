@@ -16,6 +16,7 @@ export default (query, variables)=>{
     return new Promise((done, fail)=>{
         axios.post(url ,{"query":query, "variables":variables})
         .then((response)=>{
+            console.log(response)
             if(Array.isArray(response.data.errors) && response.data.errors.length>0){
                 return fail(response.data.errors[0].message);
             }

@@ -12,18 +12,7 @@ class Observations {
         endDate: new Date(),
     })
     constructor() {
-        // makeAutoObservable(this)
-        makeObservable(this, {
-            loading: observable,
-            error: observable,
-            data: observable,
-            setSkip: action,
-            setDateRange: action,
-            setLoading: action,
-            setError: action,
-            setData:action,
-            fetchData:action
-        })
+        makeAutoObservable(this)
         this.filter.startDate = new Date(this.filter.endDate.getTime()-24*60*60*1000)
     }
     setLoading = (loading) => {
@@ -79,10 +68,10 @@ class Observations {
         console.log(this.data)
     }
     deleteImage = (link, oid, index) => {
-        api("mutation deletePhoto($link: String, $oid: String){deletePhoto(link: $link, oid: $oid){_id text time photos}}", {link, oid})
+        api("mutation deletePhoto($link: String, $oid: String){deletePhoto(link: $link, oid: $oid){_id text time photos author{_id name}}}", {link, oid})
         .then(action(({deletePhoto:updatedObservation})=>{
-            console.log(updatedObservation)
             this.data[index] = updatedObservation;
+            console.log(updatedObservation, this.data[index])
         }))
         .catch(e=>console.log("Delete Image Error ", e))
     }

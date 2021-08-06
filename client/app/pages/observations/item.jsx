@@ -3,7 +3,7 @@ import { formatDate } from '../../time'
 import Photos from './photos'
 import {Iam} from '_store/iam'
 
-const Observation = ({observation, index})=>{
+const Observation = ({observation={}, index})=>{
     const [photos, showPhotos] = useState(false)
     let user = null;
     if(observation.author._id){

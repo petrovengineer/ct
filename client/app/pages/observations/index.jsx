@@ -1,29 +1,11 @@
 import React, { useEffect } from 'react'
-import Observation from './observation';
-import Top from './top';
-import Pages from '../../components/pagination';
 import WithObservations from './withObservations'
-import OStore from '_store/observations'
-import {observer} from 'mobx-react'
+import list from './list'
 
 export default ()=>{
     return <WithObservations>
-        {({data=[], filter={}, count, setSkip})=>{
-            console.log("RENEDER")
-            return (
-                <>
-                    <div className="title">Нарушения</div>
-                    <Top/>
-                    <div className="mt-4">
-                        {data && data.map((o,i)=>(
-                                <Observation observation={o} key={o._id} index={i}/>
-                            ))}
-                    </div>
-                    <Pages count={count} limit={filter.limit} skip={filter.skip} setSkip={setSkip}/>
-                </>
-            )
-        }}
-    </WithObservations>
+                {list}
+            </WithObservations>
 }
 
 // const Observations = withObservations((props)=>{

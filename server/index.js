@@ -11,8 +11,6 @@ const app = express();
 var cors = require('cors');
 app.use(cors());
 
-const { graphqlUploadExpress } = require('graphql-upload');
-
 const {authenticateToken} = require('./auth')
 app.use(authenticateToken);
 

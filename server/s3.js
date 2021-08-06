@@ -40,7 +40,7 @@ const deleteS3 = (link)=>{
         deletePromise.then(async ()=>{
             done()
         }).catch((e)=>{
-            console.log("Error upload to S3 ", e)
+            console.log("Error delete to S3 ", e)
             fail()
         })
     })

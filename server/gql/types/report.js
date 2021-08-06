@@ -9,10 +9,14 @@ module.exports = new GraphQLObjectType({
         author: {type: UserType},
         observations: {type: new GraphQLList(ObservationType)},
         created: {type: GraphQLString,
+            resolve: ({created})=>{
+                return created.toISOString()
+            }
+        },
+        time: {type: GraphQLString,
             resolve: ({time})=>{
                 return time.toISOString()
             }
         },
-        link: {type: GraphQLString}
     })
 })

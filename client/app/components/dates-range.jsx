@@ -5,9 +5,9 @@ import ObservationStore from '_store/observations'
 import {action} from 'mobx'
 import {observer} from 'mobx-react'
 
-const Dates = observer(() => {
+const Dates = observer(({filter:{startDate, endDate}, setDateRange}) => {
     // const {startDate: startDateStore, endDate: endDateStore, setDateRange: setDateRangeStore} = ObservationStore;
-    const {filter:{startDate, endDate}, setDateRange} = ObservationStore;
+    // const {filter:{startDate, endDate}, setDateRange} = ObservationStore;
     return (
         <DatePicker
             dateFormat="dd.MM.yyyy"

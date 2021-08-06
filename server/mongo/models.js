@@ -20,7 +20,14 @@ module.exports = {
     }),
     Report: mongoose.model('Report',{
         author: {_id:{type: String}, name:{type: String}},
-        observations: [{type: mongoose.Schema.Types.ObjectId, ref: 'Observation'}],
-        created:  {type: Date, default: Date.now}
+        observations: {type: [{
+                _id: {type: String},
+                text: {type: String},
+                time: {type: Date},
+                photos: {type: [String]},
+            }]
+        } ,
+        created:  {type: Date, default: Date.now},
+        time:  {type: Date}
     })
 }
