@@ -23,8 +23,16 @@ app.get('/',(req, res)=>{
 
 app.use(bodyParser.json())
 
+let keys = [
+  {key:'7642F7', name:'Песоцкий Александр Николаевич'},
+  {key:'891CB5', name:'Попов Андрей'},
+  {key:'7C6057', name:'Петров Павел Сергеевич'},
+  {key:'35B188', name:'Диспетчер Новый'},
+]
+
 app.post('/access', (req, res)=>{
-  console.log(formatDate(new Date().toISOString()), "Request from PI: ", req.body, )
+  const key = keys.find(k=>k.key===req.body.data);
+  console.log(formatDate(new Date().toISOString()), "Request from PI: ", req.body, " ",(key?key.name:'Неизвестный пользователь') )
   res.sendStatus(200)
 })
 

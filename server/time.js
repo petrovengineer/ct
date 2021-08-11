@@ -2,7 +2,7 @@ function formatDate(isoDate){
     const date = new Date(isoDate);
     const year = date.getFullYear();
     const month = date.getMonth();
-    const day = date.getDay();
+    const day = date.getDate();
     const hours = date.getHours();
     const minutes = date.getMinutes();
     const result = addZero(day.toString()) + '.' + addZero(month.toString()) + '.' + year + ' ' 
