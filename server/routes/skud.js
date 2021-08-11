@@ -3,7 +3,6 @@ var router = express.Router();
 var bodyParser = require('body-parser')
 const {formatDate} = require('../time.js');
 const {Key, Access} = require('../mongo/models')
-const axios = require('axios')
 
 router.use(bodyParser.json())
 
