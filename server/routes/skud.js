@@ -53,7 +53,7 @@ router.get('/keys', (req, res)=>{
     Key.find({}).exec((err, docs)=>{
         if(err)return res.sendStatus(400);
         console.log("Request from PI: GET KEYS ")
-        res.send({data: docs})
+        res.send({data: docs.map(d=>d.data)})
     })
 })
 
