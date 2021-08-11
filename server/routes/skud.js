@@ -3,6 +3,7 @@ var router = express.Router();
 var bodyParser = require('body-parser')
 const {formatDate} = require('../time.js');
 const {Key, Access} = require('../mongo/models')
+const axios = require('axios')
 
 router.use(bodyParser.json())
 
@@ -22,6 +23,8 @@ router.post('/access', async ({body}, res)=>{
 
 router.get('/access', async (req, res)=>{
     try{
+        // const data = "123123"
+        // axios.post('http://localhost:3000/skud/access', {data})
         const accessList = await Access.find({}).lean();
         return res.send({data:accessList});
     }catch(e){console.log(e.message); return res.sendStatus(400)}
@@ -53,7 +56,7 @@ router.get('/keys', (req, res)=>{
     Key.find({}).exec((err, docs)=>{
         if(err)return res.sendStatus(400);
         console.log("Request from PI: GET KEYS ")
-        res.send({data: docs.map(d=>d.data)})
+        res.send(docs.map(d=>d.data))
     })
 })
 
