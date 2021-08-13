@@ -11,12 +11,25 @@ POST http://localhost:3000/skud/key
 Content-Type: application/json
 
 {
-    "data":"35B188",
-    "owner":"Диспетчер Новый"
+    "data":"396387",
+    "owner":"Климат Проф Антон"
+}
+
+###
+PUT http://localhost:3000/skud/key
+Content-Type: application/json
+
+{
+    "data": "35B188",
+    "owner":"Казакова Светлана Евгеньевна"
 }
 
 ###
 GET http://localhost:3000/skud/keys
+Content-Type: application/json
+
+###
+GET http://localhost:3000/skud/keysfull
 Content-Type: application/json
 
 ###

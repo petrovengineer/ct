@@ -42,6 +42,20 @@ router.post('/key', ({body}, res)=>{
     })
   })
 
+router.put('/key', async ({body}, res)=>{
+    if(!body.data || !body.owner)res.sendStatus(400);
+    const key = await Key.findOne({data: body.data});
+    key.owner = body.owner;
+    key.save((err)=>{
+        if(err){
+            console.log(err.message);
+            return res.sendStatus(401);
+        }
+        console.log(formatDate(new Date().toISOString()), "Request from PI: ", body," " ,key.toObject())
+        return res.sendStatus(200)
+    })
+})
+
 router.get('/exit', (req, res)=>{
   console.log("Request from PI: EXIT")
   const access = new Access({action: 0, key: null})
@@ -56,6 +70,14 @@ router.get('/keys', (req, res)=>{
         if(err)return res.sendStatus(400);
         console.log("Request from PI: GET KEYS ")
         res.send(docs.map(d=>d.data))
+    })
+})
+
+router.get('/keysfull', (req, res)=>{
+    Key.find({}).lean().exec((err, docs)=>{
+        if(err)return res.sendStatus(400);
+        console.log("Request from PI: GET KEYS ")
+        res.send(docs)
     })
 })
 
