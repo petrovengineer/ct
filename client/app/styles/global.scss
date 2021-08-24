@@ -7,6 +7,14 @@
     font-size: 14px;
 }
 
+.react-datepicker__navigation-icon{
+    width: 0;
+}
+.react-datepicker__navigation-icon::before {
+    width: 14px;
+    height: 14px;
+    top: 10px;
+}
 #search-icon{
     display: none;
 }

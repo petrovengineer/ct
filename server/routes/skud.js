@@ -5,6 +5,7 @@ const {formatDate} = require('../time.js');
 const {Key, Access} = require('../mongo/models')
 
 router.use(bodyParser.json())
+router.use(bodyParser.urlencoded({ extended: true }))
 
 router.post('/access', async ({body}, res)=>{
     if(!body.data)return res.sendStatus(400);
@@ -22,10 +23,17 @@ router.post('/access', async ({body}, res)=>{
 
 router.get('/access', async (req, res)=>{
     try{
-        // const data = "123123"
-        // axios.post('http://localhost:3000/skud/access', {data})
-        const accessList = await Access.find({}).lean();
-        return res.send({data:accessList});
+        console.log("PARAMS ",req.query);
+        let filter = req.query;
+        const count = await Access.countDocuments({})
+        .where({time:{$gte:filter.startDate || 0, $lte:filter.endDate || new Date()}})
+        const accessList = await Access.find({})
+        .where({time:{$gte:filter.startDate || 0, $lte:filter.endDate || new Date()}})
+        .skip(parseInt(filter.skip))
+        .limit(parseInt(filter.limit))
+        .sort({time:-1})
+        .lean();
+        return res.send({data:accessList, count});
     }catch(e){console.log(e.message); return res.sendStatus(400)}
 })
 

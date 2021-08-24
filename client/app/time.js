@@ -24,4 +24,4 @@ function addZero(num){
     }else return num;
 }
 
-module.exports = {formatDate, formatTime}
+module.exports = {formatDate, formatTime, addZero}

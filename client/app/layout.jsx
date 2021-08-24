@@ -8,16 +8,17 @@ import IamStore from './store/iam'
 import { Route, BrowserRouter, Switch } from 'react-router-dom'
 import Observations from './pages/observations'
 import Reports from '_pages/reports'
-import store from '_store/observations'
+import Access from '_pages/access'
+import WorkTime from '_pages/worktime'
 
 const Layout = observer(()=>{
     const {iam, whoAmI, getting, got} = IamStore;
     useEffect(()=>{
         const token = localStorage.getItem('token');
         if(token) whoAmI();
-        else got();
+        // else got();
     }, [])
-    if(getting)return <></>
+    // if(getting)return <></>
     if(!iam) return <Welcome/>
     return (
         <BrowserRouter>
@@ -32,6 +33,12 @@ const Layout = observer(()=>{
                     </Route>
                     <Route path="/reports">
                         <Reports/>
+                    </Route>
+                    <Route path="/access">
+                        <Access/>
+                    </Route>
+                    <Route path="/worktime">
+                        <WorkTime/>
                     </Route>
                     <Route path="/">
                         <Observations/>

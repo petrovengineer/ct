@@ -33,6 +33,7 @@ module.exports = (env) => {
         _store: path.resolve(__dirname, 'app/store/'),
         _pages: path.resolve(__dirname, 'app/pages/'),
         _app: path.resolve(__dirname, 'app/'),
+        _hoc: path.resolve(__dirname, 'app/hoc'),
       }
     },
     module: {
