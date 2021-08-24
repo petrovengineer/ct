@@ -14,6 +14,7 @@ PRODUCTION FRONTEND DEPLOY
 1. git remote add frontend dokku@claimtracker.ru:frontend
 2. Make .env with "API=http://api.claimtracker.ru" if not exist.
 3. npm run build
+4. make .static in public folder
 4. git push frontend
 
 SSH SERVER CONFIG
@@ -28,5 +29,5 @@ SSH ACCESS CONFIG
 
 SERVER INSTALL
 1. Install dokku
-2. Copy credentials to ~/.aws
+2. dokku config:set api AWS_ACCESS_KEY_ID=XXX AWS_SECRET_ACCESS_KEY=XXX
 

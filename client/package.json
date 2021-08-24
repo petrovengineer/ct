@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack serve --env ENVIRONMENT=development",
-    "build": "webpack --env ENVIRONMENT=production && touch public/.static"
+    "build": "webpack --env ENVIRONMENT=production"
   },
   "author": "",
   "license": "ISC",

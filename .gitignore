@@ -78,3 +78,5 @@ typings/
 docs/
 
 server/.DS_Store
+
+server/temp
