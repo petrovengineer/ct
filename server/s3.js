@@ -1,6 +1,14 @@
 const { v4: uuidv4 } = require('uuid');
 var AWS = require('aws-sdk');
 
+AWS.config.getCredentials(function(err) {
+    if (err) console.log(err.stack);
+    // credentials not loaded
+    else {
+      console.log("Access key:", AWS.config.credentials.accessKeyId);
+    }
+  });
+
 const bucketName = 'claimtracker';
 const url =  `https://${bucketName}.s3.us-east-2.amazonaws.com/`
 

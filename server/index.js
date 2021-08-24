@@ -1,5 +1,6 @@
 require('dotenv').config()
 require('./mongo/connect.js')
+
 const skud = require('./routes/skud')
 
 const express = require('express');
