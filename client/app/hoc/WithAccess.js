@@ -1,13 +1,14 @@
 import { observer } from 'mobx-react'
-import React, {useEffect} from 'react'
-import Store from '_store/base'
+import React, {useEffect, useMemo, useCallback} from 'react'
+import Store from '_store/access'
 
-const WithAccess = ({children})=>{
-    const {data, filter, setDateRange, setSkip, count} = Store;
+const WithAccess = ({children, limit})=>{
     useEffect(()=>{
-        if(!Store.data)Store.fetch();
+        let oldLimit = Store.filter.limit;
+        Store.setLimit(limit);
+        if(!Store.data || oldLimit!==limit)Store.fetch();
     }, [])
-    return children({data, filter, setDateRange, setSkip, count})
+    return children(Store)
 }
 
 export default observer(WithAccess)

@@ -1,22 +1,4 @@
-import {makeAutoObservable} from 'mobx'
-
-const { default: axios } = require("axios");
-
-const url = process.env.API+'/skud';
-
-const api = {
-    get:(filter)=>{
-        return new Promise((done, fail)=>{
-            // let params = new URLSearchParams();
-            // Object.keys(filter).map(key=>params.append(key, filter[key]))
-            axios.get(`${url}/access`, {params: filter})
-            .then(({data})=>{
-                console.log(data)
-                done(data);
-            }).catch((error)=>{fail(error.message)})
-        }) 
-    }
-}
+import {action, makeObservable, observable} from 'mobx'
 
 class Base{
     data = undefined;
@@ -25,10 +7,21 @@ class Base{
     count = undefined;
     filter =  {
         skip: 0, 
-        limit: 10, 
+        limit: 10,
     }
-    constructor(){
-        makeAutoObservable(this)
+    constructor(api){
+        makeObservable(this, {
+            data: observable,
+            loading: observable,
+            error: observable,
+            count: observable,
+            filter: observable,
+            setLimit: action,
+            setData: action,
+            setSkip: action,
+            setDateRange: action
+        })
+        this.api = api;
     }
     setLoading = (loading) => {
         this.loading = loading;
@@ -44,6 +37,11 @@ class Base{
         if(this.filter.skip!==skip)this.filter.skip = skip;
         this.fetch();
     }
+    setLimit = (limit) => {
+        if(this.filter.limit===limit)return;
+        this.filter.skip = 0;
+        this.filter.limit = limit;
+    }
     setDateRange = ([startDate, endDate]) => {
         this.filter.startDate = startDate;
         if(endDate!=null)endDate.setHours(23,59,59,999);
@@ -53,9 +51,9 @@ class Base{
         }
     }
     fetch = async ()=>{
-        const {data, count} = await api.get(this.filter);
+        const {data, count} = await this.api.get(this.filter);
         this.setData(data, count);
     }
 }
 
-export default new Base()
+export default Base;

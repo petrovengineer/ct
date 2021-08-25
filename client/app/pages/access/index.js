@@ -5,12 +5,12 @@ import Pages from '_components/pagination'
 import WithAccess from '_hoc/WithAccess'
 
 export default ()=>(
-    <WithAccess>
+    <WithAccess limit={10}>
         {({data, filter, setDateRange, setSkip, count})=>{
         if(!data)return <h1 className="title">Загрузка...</h1>
         return (
             <>
-                <h1 className="title">Контроль доступа</h1>
+                <h1 className="subtitle">Контроль доступа</h1>
                 <Dates startDate={filter.startDate} endDate={filter.endDate} setDateRange={setDateRange}/>
                 <table className="table">
                     <tbody>
@@ -30,7 +30,7 @@ export default ()=>(
                         ))}
                     </tbody>
                 </table>
-                <Pages count={count} limit={filter.limit} skip={filter.skip} setSkip={setSkip}/>
+                {filter.limit && <Pages count={count} limit={filter.limit} skip={filter.skip} setSkip={setSkip}/>}
             </>
         )
     }}

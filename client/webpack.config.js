@@ -34,6 +34,7 @@ module.exports = (env) => {
         _pages: path.resolve(__dirname, 'app/pages/'),
         _app: path.resolve(__dirname, 'app/'),
         _hoc: path.resolve(__dirname, 'app/hoc'),
+        _api: path.resolve(__dirname, 'app/api'),
       }
     },
     module: {

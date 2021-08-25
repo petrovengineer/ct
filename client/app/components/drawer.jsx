@@ -11,7 +11,7 @@ export default function Drawer(){
         if(drawer){
             document.getElementById("mySidenav").style.width = "250px";
             document.getElementById("mySidenav").style.padding = "20px";
-            document.getElementById("main").style.marginLeft = "250px";
+            if(document.body.clientWidth>640) document.getElementById("main").style.marginLeft = "250px";
         }else{
             document.getElementById("mySidenav").style.width = "60px";
             document.getElementById("mySidenav").style.padding = "20px 0px 20px 60px";
@@ -19,7 +19,7 @@ export default function Drawer(){
         }
     }, [drawer])
     return (
-            <aside id="mySidenav" className={s.sidenav+ ' has-background-link-light'}>
+            <aside id="mySidenav" className={s.sidenav}>
                 <Iam/>
                 <span className={s.closebtn} onClick={()=>{setDrawer(!drawer)}}>&times;</span>
                 {menu.map(group=>(
@@ -38,7 +38,7 @@ const Items = ({items})=>{
         return <ul className="menu-list">
             {items.map(item=>(
                 <li key={item._id}>
-                    <Link to={item.link} className={location.pathname===item.link?"is-active":undefined}>{item.name}</Link>
+                    <Link to={item.link} className={location.pathname===item.link?"has-background-success":undefined}>{item.name}</Link>
                     {Array.isArray(item.items) && <Items items={item.items}/>}
                 </li>
             ))}

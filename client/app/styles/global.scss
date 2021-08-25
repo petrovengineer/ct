@@ -66,3 +66,19 @@
     align-items: center;
     justify-content: space-between;
 }
+.dropdown-content a{
+    color: #4a4a4a;
+}
+.dropdown-content a:hover{
+    color: blue;
+}
+// .menu-label{
+//     color: wheat;
+// }
+.pagination-link.is-current{
+    border-color: white;
+}
+
+.menu-list a{
+    color: wheat;
+}
