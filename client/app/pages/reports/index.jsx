@@ -7,6 +7,7 @@ import store from '_store/reports'
 import { observer } from 'mobx-react'
 import DatePicker from 'react-datepicker'
 import ru from 'date-fns/locale/ru';
+import Calendar from '_components/calendar'
 
 export default observer(()=>{
     // if(loading)return <div className="subtitle">Loading...</div>
@@ -22,9 +23,8 @@ export default observer(()=>{
     }, [data])
     return (
         <>
-            
             <div className="title">Отчёты <button className="button is-link" onClick={()=>{setShowNewReport(true)}}>Добавить</button></div>
-            <DatePicker
+            {/* <DatePicker
                 dateFormat="dd.MM.yyyy"
                 className="date-peacker-custom-input"
                 startDate={startDate}
@@ -33,8 +33,13 @@ export default observer(()=>{
                 }}
                 inline
                 locale={ru}
-                // showMonthDropdown
                 openToDate={new Date(new Date().getTime()-24*60*60*1000)}
+            /> */}
+            <Calendar 
+                startDate={startDate}
+                onChange={(date) => {
+                    setStartDate(date);
+                }}
             />
             {showNewReport && 
                 <Modal close={()=>setShowNewReport(false)}>

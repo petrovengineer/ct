@@ -3,6 +3,7 @@ import {formatDate} from '_app/time'
 import Dates from '_components/dates'
 import Pages from '_components/pagination'
 import WithAccess from '_hoc/WithAccess'
+import Calendar from '_components/calendar'
 
 export default ()=>(
     <WithAccess limit={10}>
@@ -11,7 +12,8 @@ export default ()=>(
         return (
             <>
                 <h1 className="subtitle">Контроль доступа</h1>
-                <Dates startDate={filter.startDate} endDate={filter.endDate} setDateRange={setDateRange}/>
+                <Calendar range startDate={filter.startDate} endDate={filter.endDate} onChange={(update)=>setDateRange(update)}/>
+                {/* <Dates startDate={filter.startDate} endDate={filter.endDate} setDateRange={setDateRange}/> */}
                 <table className="table">
                     <tbody>
                         <tr>

@@ -3,6 +3,7 @@ import WithAccess from "_hoc/WithAccess";
 import Dates from "_components/dates"
 import {addZero} from "_app/time"
 import {shortName} from '_app/usefull'
+import Calendar from '_components/calendar'
 
 const line = 9;
 
@@ -58,7 +59,7 @@ export default ()=>(
             return (
                 <>
                     <h1 className="subtitle">Учёт рабочего времени</h1>
-                    <Dates startDate={filter.startDate} endDate={filter.endDate} setDateRange={setDateRange}/>
+                    <Calendar range startDate={filter.startDate} endDate={filter.endDate} onChange={setDateRange}/>
                     {(!filter.startDate || !filter.endDate)?
                         <h1 className="subtitle mt-2 has-text-danger">Необходимо выбрать временной интервал</h1>
                         :<div style={{display:'flex'}}>
