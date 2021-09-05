@@ -10,6 +10,7 @@ import Observations from './pages/observations'
 import Reports from '_pages/reports'
 import Access from '_pages/access'
 import WorkTime from '_pages/worktime'
+import Keys from '_pages/keys'
 
 const Layout = observer(()=>{
     const {iam, whoAmI, getting, got} = IamStore;
@@ -39,6 +40,9 @@ const Layout = observer(()=>{
                     </Route>
                     <Route path="/worktime">
                         <WorkTime/>
+                    </Route>
+                    <Route path="/keys">
+                        <Keys/>
                     </Route>
                     <Route path="/">
                         <Observations/>

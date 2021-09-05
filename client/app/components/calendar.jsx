@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const monthList = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
-const dayList = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
+import {dayList, monthList, monthListDec} from '_app/time'
 
 const s = {
     cell:{width: '30px', height:'30px', paddingTop: '2px', display:'inline-block', textAlign:'center', cursor:'pointer', marginTop:'5px'}
@@ -66,7 +65,7 @@ export default ({onChange, startDate, endDate, range})=>{
     return (
         <>
             <div style={{width:'235px', border: '1px solid gray', padding:'5px', cursor: 'pointer'}} onClick={()=>showCalendar(!calendar)}>
-                {startDate.getDate()} {monthList[startDate.getMonth()]} {(range && endDate)&& <> - {endDate.getDate()} {monthList[endDate.getMonth()]} {endDate.getFullYear()}</>}
+                {startDate.getDate()} {monthListDec[startDate.getMonth()]} {(range && endDate)&& <> - {endDate.getDate()} {monthListDec[endDate.getMonth()]} {endDate.getFullYear()}</>}
             </div>
             {calendar && <div style={{width:'235px', border: '1px solid gray', padding:'10px'}} >
                 <div>

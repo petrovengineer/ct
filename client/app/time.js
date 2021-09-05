@@ -25,4 +25,9 @@ function addZero(num){
     }else return num;
 }
 
-module.exports = {formatDate, formatTime, addZero}
+const weekDaysShort = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб',]
+const monthList = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
+const monthListDec = ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря']
+const dayList = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
+
+module.exports = {formatDate, formatTime, addZero, weekDaysShort, monthList, dayList, monthListDec}

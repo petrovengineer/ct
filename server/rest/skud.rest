@@ -11,8 +11,8 @@ POST http://localhost:3000/skud/key
 Content-Type: application/json
 
 {
-    "data":"396387",
-    "owner":"Климат Проф Антон"
+    "data":"887B06",
+    "owner":"Казаков Геворк Аркадьевич"
 }
 
 ###
@@ -20,8 +20,8 @@ PUT http://localhost:3000/skud/key
 Content-Type: application/json
 
 {
-    "data": "35B188",
-    "owner":"Казакова Светлана Евгеньевна"
+    "data": "2741F9",
+    "owner":"Алексеев Владимир Львович"
 }
 
 ###

@@ -1,4 +1,4 @@
-import {action, makeObservable, observable} from 'mobx'
+import {action, makeObservable, observable, flow} from 'mobx'
 
 class Base{
     data = undefined;
@@ -8,6 +8,9 @@ class Base{
     filter =  {
         skip: 0, 
         limit: 10,
+        sort: {
+            created: -1
+        }
     }
     constructor(api){
         makeObservable(this, {
@@ -19,7 +22,9 @@ class Base{
             setLimit: action,
             setData: action,
             setSkip: action,
-            setDateRange: action
+            setDateRange: action,
+            create: action,
+            removeItem: action
         })
         this.api = api;
     }
@@ -30,8 +35,13 @@ class Base{
         this.error = error;
     }
     setData = (data, count) => {
+        console.log("SET DATA", data, count)
         this.count = count;
         this.data = data;
+    }
+    removeItem = (_id) => {
+        const index = this.data.findIndex((item)=>(item._id===_id))
+        this.data.splice(index, 1);
     }
     setSkip = (skip) => {
         if(this.filter.skip!==skip)this.filter.skip = skip;
@@ -51,8 +61,28 @@ class Base{
         }
     }
     fetch = async ()=>{
-        const {data, count} = await this.api.get(this.filter);
+        const {data, count} = await this.api.get(this.filter, this.sort);
         this.setData(data, count);
+    }
+    create = async (data)=>{
+        try{
+            const item = await this.api.create(data);
+            const newData = [...(this.data || [])];
+            newData.unshift(item);
+            this.setData(newData, this.count+1);
+        }catch(e){
+            console.log(e)
+        }
+
+    }
+    remove = async (_id)=>{
+        try{
+            await this.api.remove(_id)
+            this.removeItem(_id)
+        }
+        catch(e){
+            console.log(e)
+        }
     }
 }
 

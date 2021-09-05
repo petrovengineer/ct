@@ -49,10 +49,11 @@ const menu = [
     {_id: 'g1', title: 'Эксплуатация', items: 
         [
             // {_id:'e1', name: 'Неисправности', link: '/breakdowns'},
-            {_id:'e2', name: 'Нарушения', link: '/observations'},
+            {_id:'e2', name: 'Оперативный журнал', link: '/observations'},
             {_id:'e3', name: 'Отчёты', link: '/reports'},
             {_id:'e4', name: 'Контроль доступа', link: '/access'},
             {_id:'e5', name: 'Учёт времени', link: '/worktime'},
+            {_id:'e6', name: 'Ключи', link: '/keys'},
         ]
     },
     // {_id:'g2', title: 'Системы', items: [

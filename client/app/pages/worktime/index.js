@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import WithAccess from "_hoc/WithAccess";
 import Dates from "_components/dates"
-import {addZero} from "_app/time"
+import {addZero, weekDaysShort} from "_app/time"
 import {shortName} from '_app/usefull'
 import Calendar from '_components/calendar'
 
-const line = 9;
+const startWorkTime = 9;
 
 export default ()=>(
     <WithAccess limit={null}>
@@ -60,13 +60,14 @@ export default ()=>(
                 <>
                     <h1 className="subtitle">Учёт рабочего времени</h1>
                     <Calendar range startDate={filter.startDate} endDate={filter.endDate} onChange={setDateRange}/>
+                    <hr/>              
                     {(!filter.startDate || !filter.endDate)?
                         <h1 className="subtitle mt-2 has-text-danger">Необходимо выбрать временной интервал</h1>
                         :<div style={{display:'flex'}}>
                             <table style={{width:'auto', flexShrink:0}} className="table">
                                 <tbody>
                                     <tr>
-                                            <th>ФИО</th>
+                                            <th>Сотрудник</th>
                                     </tr>
                                     {entries.map((entry, i)=>(
                                         <tr key={i}>
@@ -78,20 +79,18 @@ export default ()=>(
                                 <table className="table">
                                     <tbody>
                                         <tr>
-                                            {/* <th></th> */}
-                                            {dates.map((date,i)=>(<th className={(date.getDay()===6 || date.getDay()===0)?"has-text-danger":""}>{addZero(date.getDate())}.{addZero((date.getMonth()+1))}</th>))}
+                                            {dates.map((date,i)=>(<HeaderDates key={i} date={date}/>))}
                                         </tr>
                                         {entries.map((entry, i)=>(
                                             <tr key={i}>
-                                                {/* <td style={{position:'absolute', left:0}}>{entry.owner}</td> */}
                                                 {dates.map((date,i)=>{
                                                     const entryDate = entry.dates.find(entryDate=>(
                                                         entryDate.getFullYear() === date.getFullYear() &&
                                                         entryDate.getMonth() === date.getMonth() &&
                                                         entryDate.getDate() === date.getDate()
                                                     ))
-                                                    if(!entryDate)return <td className="">X</td>
-                                                    return <td className={entryDate.getHours()<line?'has-text-success':'has-text-danger'}>{`${addZero(entryDate.getHours())}:${addZero(entryDate.getMinutes())}`}</td>
+                                                    if(!entryDate)return <td className="has-text-grey-light">x</td>
+                                                    return <td className={entryDate.getHours()<startWorkTime?'has-background-success has-text-white':'has-background-danger has-text-white'}>{`${addZero(entryDate.getHours())}:${addZero(entryDate.getMinutes())}`}</td>
                                                 })}
                                             </tr>
                                         ))}
@@ -105,3 +104,12 @@ export default ()=>(
         }}
     </WithAccess>
 )
+
+function HeaderDates({date}){
+    return (
+        <th className={` ${(date.getDay()===6 || date.getDay()===0)?"has-text-danger":null}`} style={{minWidth:'100px'}}>
+                <span>{weekDaysShort[date.getDay()]} </span>
+                <span className="has-text-grey-light">{addZero(date.getDate())}.{addZero((date.getMonth()+1))}</span>
+        </th>
+    )
+}

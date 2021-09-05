@@ -33,6 +33,7 @@ module.exports = {
     Key: mongoose.model('Key',{
         data: {type: String, unique: true},
         owner: {type: String},
+        created:  {type: Date, default: Date.now}
     }),
     Access: mongoose.model('Access',{
         action: {type: Number}, //0-exit, 1-enter

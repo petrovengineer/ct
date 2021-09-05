@@ -41,13 +41,13 @@ router.get('/access', async (req, res)=>{
 router.post('/key', ({body}, res)=>{
     if(!body.data || !body.owner)res.sendStatus(400);
     const key = new Key({data:body.data, owner: body.owner})
-    key.save((err)=>{
+    key.save((err, doc)=>{
         if(err){
             console.log(err.message);
             return res.sendStatus(401);
         }
         console.log(formatDate(new Date().toISOString()), "Request from PI: ", body," " ,key.toObject())
-        return res.sendStatus(200)
+        return res.send(doc.toObject())
     })
   })
 
@@ -82,12 +82,37 @@ router.get('/keys', (req, res)=>{
     })
 })
 
-router.get('/keysfull', (req, res)=>{
-    Key.find({}).lean().exec((err, docs)=>{
-        if(err)return res.sendStatus(400);
-        console.log("Request from PI: GET KEYS ")
-        res.send(docs)
-    })
+router.get('/keysfull', async (req, res)=>{
+    try{
+        let filter = req.query;
+        console.log("PARAMS ",req.query);
+        const count = await Key.countDocuments({})
+        await Key.find({})
+        // .where({created:{$gte:filter.startDate || 0, $lte:filter.endDate || new Date()}})
+        .skip(parseInt(filter.skip || 0))
+        .limit(parseInt(filter.limit || undefined))
+        .sort(filter && filter.sort && JSON.parse(filter.sort))
+        .lean()
+        .exec((err, data)=>{
+            if(err)return res.sendStatus(400);
+            res.send({data, count})
+        })
+    }catch(e){
+        console.log(e)
+    }
+})
+
+router.delete('/key', async ({query}, res)=>{
+    try{
+        console.log("Request: REMOVE KEY ", query)
+        if(!query._id)return res.sendStatus(400);
+        await Key.findOneAndDelete({_id:query._id})
+        return res.sendStatus(200)
+    }
+    catch(e){
+        console.log(e);
+        return res.sendStatus(400);
+    }
 })
 
 module.exports = router;
