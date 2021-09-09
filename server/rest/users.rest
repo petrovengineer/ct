@@ -5,7 +5,7 @@ POST http://localhost:3000/
 Content-Type: application/json
 
 {
-    "query":"query{users{name}}"
+    "query":"query{users{_id name}}"
 }
 
 ###

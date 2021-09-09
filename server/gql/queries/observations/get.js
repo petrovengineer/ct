@@ -15,7 +15,7 @@ module.exports = {
     args: {
         filter:{type: FilterType}
     },
-    resolve: async (_,{filter = {}})=>{
+    resolve: async (_,{filter = {}}, {_id})=>{
         console.log("FILTER ", filter)
         const count =  await Observation
         .where({time:{$gte:filter.startDate, $lte:filter.endDate}})

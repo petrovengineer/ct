@@ -8,8 +8,8 @@ module.exports = {
     args: {
         filter:{type: FilterType}
     },
-    resolve: async (_,{filter = {}})=>{
-        console.log("REPORT FILTER ", filter)
+    resolve: async (root,{filter = {}}, req)=>{
+        console.log("REPORT FILTER ", filter, req._id)
         const reports =  await Report
         .find({time:{$gte:filter.startDate, $lte:filter.endDate}})
         .sort({time: -1})

@@ -54,6 +54,7 @@ const menu = [
             {_id:'e4', name: 'Контроль доступа', link: '/access'},
             {_id:'e5', name: 'Учёт времени', link: '/worktime'},
             {_id:'e6', name: 'Ключи', link: '/keys'},
+            {_id:'e7', name: 'Привелегии', link: '/permissions'},
         ]
     },
     // {_id:'g2', title: 'Системы', items: [

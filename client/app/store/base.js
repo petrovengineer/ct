@@ -1,4 +1,5 @@
 import {action, makeObservable, observable, flow} from 'mobx'
+import Info from '_store/info'
 
 class Base{
     data = undefined;
@@ -61,8 +62,12 @@ class Base{
         }
     }
     fetch = async ()=>{
-        const {data, count} = await this.api.get(this.filter, this.sort);
-        this.setData(data, count);
+        try{
+            const {data, count} = await this.api.get(this.filter, this.sort);
+            this.setData(data, count);
+        }catch(e){
+            Info.addMessage({message: e})
+        }
     }
     create = async (data)=>{
         try{
@@ -71,7 +76,7 @@ class Base{
             newData.unshift(item);
             this.setData(newData, this.count+1);
         }catch(e){
-            console.log(e)
+            Info.addMessage({message: e})
         }
 
     }
@@ -81,7 +86,7 @@ class Base{
             this.removeItem(_id)
         }
         catch(e){
-            console.log(e)
+            Info.addMessage({message: e})
         }
     }
 }

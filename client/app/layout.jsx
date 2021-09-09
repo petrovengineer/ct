@@ -11,6 +11,7 @@ import Reports from '_pages/reports'
 import Access from '_pages/access'
 import WorkTime from '_pages/worktime'
 import Keys from '_pages/keys'
+import Permissions from './pages/permissions'
 
 const Layout = observer(()=>{
     const {iam, whoAmI, getting, got} = IamStore;
@@ -43,6 +44,9 @@ const Layout = observer(()=>{
                     </Route>
                     <Route path="/keys">
                         <Keys/>
+                    </Route>
+                    <Route path="/permissions">
+                        <Permissions/>
                     </Route>
                     <Route path="/">
                         <Observations/>

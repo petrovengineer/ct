@@ -65,7 +65,7 @@ export default ({onChange, startDate, endDate, range})=>{
     return (
         <>
             <div style={{width:'235px', border: '1px solid gray', padding:'5px', cursor: 'pointer'}} onClick={()=>showCalendar(!calendar)}>
-                {startDate.getDate()} {monthListDec[startDate.getMonth()]} {(range && endDate)&& <> - {endDate.getDate()} {monthListDec[endDate.getMonth()]} {endDate.getFullYear()}</>}
+                {startDate.getDate()} {monthListDec[startDate.getMonth()]} {(range && endDate)&& <> - {endDate.getDate()} {monthListDec[endDate.getMonth()]}</>}
             </div>
             {calendar && <div style={{width:'235px', border: '1px solid gray', padding:'10px'}} >
                 <div>

@@ -6,7 +6,7 @@ const skud = require('./routes/skud')
 const express = require('express');
 
 const {graphqlHTTP} = require('express-graphql');
-const schema = require('./gql/schema.js');
+const schema = require('./schema.js');
 
 let port = process.env.PORT || 3000;
 const app = express();
@@ -26,7 +26,7 @@ app.get('/',(req, res)=>{
 app.post('/', 
   graphqlHTTP({
     schema: schema,
-    graphiql: true
+    graphiql: true,
   }));
 
 var multer = require('multer');

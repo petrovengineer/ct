@@ -34,7 +34,7 @@ export default ()=>{
                                         <td>{key.owner}</td>
                                         <td>{key.data}</td>
                                         <td>
-                                            <span className="has-text-weight-bold has-text-danger" style={{cursor:'pointer'}} onClick={()=>setToRemove(key._id)}>x</span>
+                                            <button className="delete" onClick={()=>setToRemove(key._id)}></button>
                                         </td>
                                     </tr>
                                 ))}

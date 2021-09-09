@@ -10,7 +10,7 @@ function authenticateToken(req, res, next){
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user)=>{
         if(user!=null){
             req._id = user._id; 
-            req.name = user.name; 
+            req.name = user.name;
         }
         next();
     })}

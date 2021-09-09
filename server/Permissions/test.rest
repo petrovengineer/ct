@@ -1,0 +1,34 @@
+###
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "query":"query{permissions{data{_id name read write} count}}"
+}
+
+###
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "query":"mutation createPermission($name: String){create(name: $name){_id name read write}}",
+    "variables":{"name": "permissions"}
+}
+
+###
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "query":"mutation removePermission($_id: String){remove(_id: $_id)}",
+    "variables":{"_id": "61366ee481ba9c351dbee6f5"}
+}
+
+###
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "query":"mutation updatePermission($_id: String, $read: [String], $write:[String]){update(_id: $_id, read: $read, write: $write){_id name read write}}",
+    "variables":{"_id": "61367e0e724d3a375780552f", "read": ["60e36eb794934016182e2dce"], "write":["60e36eb794934016182e2dce"]}
+}

@@ -43,5 +43,5 @@ module.exports = {
             data: {type: String},
         }},
         time:  {type: Date, default: Date.now},
-    })
+    }),
 }

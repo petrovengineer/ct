@@ -2,15 +2,15 @@ import {action, makeAutoObservable, configure  } from 'mobx'
 import api from '../api';
 
 class Users {
-    users = []
+    data = undefined
     isLoading = false;
     constructor() {
         makeAutoObservable(this)
     }
-    getUsers = () => {
+    fetch = () => {
             this.isLoading = true;
             api("query{users{_id name}}")
-            .then(action(({users})=>{this.users = users}))
+            .then(action(({users})=>{this.data = users}))
             .catch((e)=>{})
             .finally(action(()=>{this.isLoading = false}))
         }

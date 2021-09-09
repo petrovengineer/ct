@@ -16,18 +16,19 @@ export default (query, variables)=>{
     return new Promise((done, fail)=>{
         axios.post(url ,{"query":query, "variables":variables})
         .then((response)=>{
-            // console.log(response)
             if(Array.isArray(response.data.errors) && response.data.errors.length>0){
                 return fail(response.data.errors[0].message);
             }
             done(response.data.data);
         })
         .catch((e)=>{
-            console.log("ERROR: ", e)
             if(e.response && e.response.data && Array.isArray(e.response.data.errors)){
-                console.log("ERROR ",e.response.data.errors[0].message);
+                console.log("GQL ERRORS ",e.response.data.errors.map(e=>e.message).join(' '));
+                fail(`GQL Error: ${e.response.data.errors.map(e=>e.message).join(' ')}`);
+                return;
             }
-            fail('Server Error!');
+            console.log("SERVER ERROR ",e.message);
+            fail(e.message);
         })
     })
 }
