@@ -16,7 +16,7 @@ router.post('/access', async ({body}, res)=>{
     if(key)data = {key_id:key._id, owner: key.owner, data: body.data}
     else data = {key_id: null, owner: null, data: body.data}
     const {time = new Date()} = body;
-    const access = new Access({action: (body.action || 1), key: data, time})
+    const access = new Access({action: (body.action===0 || 1), key: data, time})
     access.save((err)=>{
         if(err)return sendStatus(401);
         res.sendStatus(200)

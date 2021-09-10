@@ -36,7 +36,7 @@ class Base{
         this.error = error;
     }
     setData = (data, count) => {
-        console.log("SET DATA", data, count)
+        // console.log("SET DATA", data, count)
         this.count = count;
         this.data = data;
     }
