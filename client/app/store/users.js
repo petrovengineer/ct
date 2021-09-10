@@ -9,7 +9,7 @@ class Users {
     }
     fetch = () => {
             this.isLoading = true;
-            api("query{users{_id name}}")
+            api("query{users{_id name email active}}")
             .then(action(({users})=>{this.data = users}))
             .catch((e)=>{})
             .finally(action(()=>{this.isLoading = false}))

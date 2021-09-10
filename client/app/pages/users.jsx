@@ -1,22 +1,33 @@
 import React, { useEffect } from 'react'
-import {observer} from 'mobx-react'
-import UsersStore from '../store/users'
+import WithUsers from '_hoc/WithUsers'
 
-const Users = observer(()=>{
-    const {users, getUsers, isLoading} = UsersStore;
-    useEffect(()=>{
-        getUsers();
-    }, [])
-    if(isLoading)return <h2>Loading...</h2>
-    return (
-        <>
-            <h1 className="title">Users</h1>
-            <ul>
-                {users.map(u=><li key={u._id}>{u.name}</li>)}
-            </ul>
-        </>
-    )
-})
+function Users(){
+    return <WithUsers>
+        {({data:users})=>{
+            if(!users)return 'Загрузка...'
+            return (
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th>ФИО</th><th>Почта</th><th>active</th><th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {users.map(u=><User user={u}/>)}
+                    </tbody>
+                </table>
+            )
+        }}
+    </WithUsers>
+}
 
 export default Users
+
+function User({user}){
+    return <tr>
+        <th>{user.name}</th><th>{user.email}</th>
+        <th>{user.active?'active':'blocked'}</th>
+        <th></th>
+    </tr>
+}
 

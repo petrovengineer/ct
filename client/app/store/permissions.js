@@ -7,7 +7,6 @@ class Permissions extends Base{
     }
     update = async (_id, payload)=>{
         const result = await api.update(_id, payload)
-        console.log("RESULT", result)
     }
 }
 

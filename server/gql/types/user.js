@@ -1,4 +1,4 @@
-let {GraphQLString, GraphQLObjectType, GraphQLNonNull} = require('graphql')
+let {GraphQLString, GraphQLObjectType, GraphQLNonNull, GraphQLBoolean} = require('graphql')
 
 const UserType = new GraphQLObjectType({
     name: "UserType",
@@ -7,6 +7,7 @@ const UserType = new GraphQLObjectType({
       _id: {type: (GraphQLString)},
       name: {type: GraphQLString},
       email: {type: GraphQLString},
+      active: {type: GraphQLBoolean},
       refreshToken: {type: GraphQLString}
     })
   })

@@ -1,4 +1,4 @@
-import {action, makeObservable, observable, flow} from 'mobx'
+import {action, makeObservable, observable} from 'mobx'
 import Info from '_store/info'
 
 class Base{

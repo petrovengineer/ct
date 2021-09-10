@@ -3,6 +3,8 @@ import s from '../styles/drawer.module.scss'
 import {Link} from 'react-router-dom'
 import Iam from './iam.jsx'
 import { useLocation } from 'react-router-dom'
+import WithPermissions from '_hoc/WithPermissions'
+import Store from '_store/menu'
 
 export default function Drawer(){
     const [drawer, setDrawer] = useState(true);
@@ -18,18 +20,29 @@ export default function Drawer(){
             document.getElementById("main").style.marginLeft = "60px";
         }
     }, [drawer])
+    const {data: menu} = Store;
+    function existInPermissions(group, permissions){
+        return true
+    }
     return (
             <aside id="mySidenav" className={s.sidenav}>
                 <Iam/>
                 <span className={s.closebtn} onClick={()=>{setDrawer(!drawer)}}>&times;</span>
-                {menu.map(group=>(
-                    <div  key={group._id} className="mt-4">
-                        <p className="menu-label">
-                            {group.title}
-                        </p>
-                        <Items items={group.items}/>
-                    </div>    
-                ))}
+                <WithPermissions>
+                    {({data:permissions})=>{
+                    return (
+                        menu.filter(group=>(existInPermissions(group, permissions)))
+                        .map(group=>(
+                            <div  key={group._id} className="mt-4">
+                                <p className="menu-label">
+                                    {group.title}
+                                </p>
+                                <Items items={group.items}/>
+                            </div>    
+                        ))
+                    )}}
+                </WithPermissions>
+
             </aside>
     )
 }
@@ -44,27 +57,3 @@ const Items = ({items})=>{
             ))}
         </ul>
 }
-
-const menu = [
-    {_id: 'g1', title: 'Эксплуатация', items: 
-        [
-            // {_id:'e1', name: 'Неисправности', link: '/breakdowns'},
-            {_id:'e2', name: 'Оперативный журнал', link: '/observations'},
-            {_id:'e3', name: 'Отчёты', link: '/reports'},
-            {_id:'e4', name: 'Контроль доступа', link: '/access'},
-            {_id:'e5', name: 'Учёт времени', link: '/worktime'},
-            {_id:'e6', name: 'Ключи', link: '/keys'},
-            {_id:'e7', name: 'Привелегии', link: '/permissions'},
-        ]
-    },
-    // {_id:'g2', title: 'Системы', items: [
-    //     {_id:'s1', name:'Противопожарная защита', link: '/systems/appz'},
-    //     {_id:'s2', name:'Вентиляция', link: '/systems/vent'},
-    // ]},
-    // {_id: 'g3', title: 'Администрирование', items:
-    //     [
-    //         {_id:'a1', name: 'Пользователи', link: '/users'},
-    //         {_id:'a2', name: 'Меню', link: '/menu'},
-    //     ]
-    // }
-]
