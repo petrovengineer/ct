@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import {upload} from '../../api'
-import InfoStore from '../../store/info'
-import ObservationsStore from '../../store/observations'
+import {upload} from '_app/api'
+import InfoStore from '_store/info'
+import ObservationsStore from '_store/_observations'
 import Photo from './photo'
-import Modal from '../../components/modal'
+import Modal from '_components/modal'
 
 const Photos = ({photos= [], oid, index})=>{
     const [large, showLarge] = useState(null)

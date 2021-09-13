@@ -42,6 +42,7 @@ class Observations {
             this.setLoading(true)
             const {observations:data} = await api("query observations($filter: FilterType){observations(filter: $filter){observations{_id text time photos author{_id name}} count}}", 
             {filter: this.filter})
+            console.log("FETCH STORE ", data)
             this.setLoading(false)
             this.setData(data.observations, data.count)
         }

@@ -35,6 +35,12 @@ module.exports = (env) => {
         _app: path.resolve(__dirname, 'app/'),
         _hoc: path.resolve(__dirname, 'app/hoc'),
         _api: path.resolve(__dirname, 'app/api'),
+        _interfaces: path.resolve(__dirname, 'app/_interfaces'),
+        _queries: path.resolve(__dirname, 'app/queries'),
+        process: 'process/browser',
+        stream: "stream-browserify",
+        zlib: "browserify-zlib",
+        vm: "vm-browserify"
       }
     },
     module: {
@@ -98,7 +104,11 @@ module.exports = (env) => {
         {
             test: /\.jsx?$/,
             loader: "babel-loader",
-        }
+        },
+        {
+          test: /\.docx$/i,
+          type: 'asset/resource'
+        },
       ]
     },
     plugins: [
@@ -107,6 +117,10 @@ module.exports = (env) => {
         filename: 'index.html',
         template: 'app/template.html',
         favicon: "app/favicon.ico"
+      }),
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+        Buffer: ['buffer', 'Buffer'],
       }),
       new webpack.DefinePlugin(envKeys)
     ],

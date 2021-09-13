@@ -25,9 +25,19 @@ function addZero(num){
     }else return num;
 }
 
+function getClearDate(date){
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate())
+}
+
+function getAmount(inTime, outTime){
+    if(!inTime || !outTime)return 'x';
+    const amount = outTime.getTime() - inTime.getTime()
+    return (Math.floor(amount / (1000*60*60)))
+}
+
 const weekDaysShort = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб',]
 const monthList = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
 const monthListDec = ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря']
 const dayList = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
 
-module.exports = {formatDate, formatTime, addZero, weekDaysShort, monthList, dayList, monthListDec}
+module.exports = {formatDate, formatTime, addZero, weekDaysShort, monthList, dayList, monthListDec, getClearDate, getAmount}

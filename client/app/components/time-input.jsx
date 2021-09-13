@@ -1,26 +1,30 @@
 import React from 'react'
+import {addZero} from '_app/time.js'
 
 const hours = []
 const minutes = []
 for(let i=0; i<=23; i++){hours.push(i<10?"0"+i:i.toString())}
 for(let i=0; i<=59; i++){minutes.push(i<10?"0"+i:i.toString())}
 
-const TimeInput = ({ value, onChange }) => {
-    const hour = value[0]+value[1];
-    const minute = value[3]+value[4];
+const TimeInput = ({ time, onChange }) => {
+    const hour = time.getHours()
+    const minute = time.getMinutes();
     const onSelectHour = (h)=>{
-        onChange(h+":"+minute)
+        const newTime = new Date(time.getTime())
+        newTime.setHours(h)
+        onChange(newTime)
     }
     const onSelectMinute = (m)=>{
-        onChange(hour+":"+m)
+        const newTime = new Date(time.getTime())
+        newTime.setMinutes(m)
+        onChange(newTime)
     }
     return (
     <div style={{display:'flex', alignItems:'center'}}>
-        <div className=" mr-2" style={{fontSize:'16px'}}>Время:</div>
         <div className="dropdown is-hoverable mr-2">
             <div className="dropdown-trigger">
                 <button className="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                <span>{hour}</span>
+                <span>{addZero(hour)}</span>
                 </button>
             </div>
             <div className="dropdown-menu" id="dropdown-menu" role="menu">
@@ -32,7 +36,7 @@ const TimeInput = ({ value, onChange }) => {
         <div className="dropdown is-hoverable ">
             <div className="dropdown-trigger">
                 <button className="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                <span>{minute}</span>
+                <span>{addZero(minute)}</span>
                 </button>
             </div>
             <div className="dropdown-menu" id="dropdown-menu" role="menu">

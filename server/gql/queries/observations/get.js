@@ -16,12 +16,15 @@ module.exports = {
         filter:{type: FilterType}
     },
     resolve: async (_,{filter = {}}, {_id})=>{
-        console.log("FILTER ", filter)
+        console.log("OBS FILTER ", filter)
+        const condition = { time:{$gte:filter.startDate, $lte:filter.endDate}};
+        if(filter._id)condition._id = filter._id;
         const count =  await Observation
-        .where({time:{$gte:filter.startDate, $lte:filter.endDate}})
+        .where(condition)
         .countDocuments();
+        console.log("OBS COUNT", count)
         const observations =  await Observation
-        .find({time:{$gte:filter.startDate, $lte:filter.endDate}})
+        .find(condition)
         .sort({time: -1})
         .skip(filter.skip)
         .limit(filter.limit)

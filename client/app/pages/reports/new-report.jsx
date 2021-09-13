@@ -2,11 +2,10 @@ import React, {useState} from 'react'
 import Dates from '_components/dates-range'
 import {formatDate} from '_app/time'
 import store from '_store/reports'
-import ru from 'date-fns/locale/ru';
-import DatePicker from 'react-datepicker'
 
-export default ({filter, setDateRange, data=[]})=>{
+export default function NewReport({filter, setDateRange, data=[]}){
     const [checkList, setCheckList] = useState([])
+    console.log("NEW REPORT ", data)
     function handleChange(_id){
         const index = checkList.indexOf(_id)
         if(index<0)setCheckList([...checkList, _id])
@@ -33,7 +32,7 @@ export default ({filter, setDateRange, data=[]})=>{
                 {data.map((item)=>(
                     <div>
                         <label className="checkbox" key={item._id} >
-                            <input type="checkbox" checked={checkList.indexOf(item._id)>=0} onChange={()=>handleChange(item._id)}/>
+                            <input type="checkbox" checked={checkList.indexOf(item._id)>=0} onChange={()=>handleChange(item._id)} style={{width:'16px', height:'16px'}}/>
                             <span className="mx-2 has-text-link">{formatDate(item.time)}</span>
                             <span>{item.text}</span>
                         </label>

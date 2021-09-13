@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 
 const Pages = ({count, limit, skip, setSkip})=>{
+    if(!limit)return <></>;
     const pages = useMemo(()=>(
         Array.from({ length: Math.ceil(count/limit) }, (_, i) => i)
     ),[count])

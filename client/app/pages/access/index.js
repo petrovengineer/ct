@@ -27,7 +27,7 @@ export default ()=>(
                                 <td>{formatDate(access.time)}</td>
                                 <td>{access.key.owner?access.key.owner:'Неизвестный пользователь'}</td>
                                 <td>{access.key.data}</td>
-                                <td>{access.action===1?'Вход':'Выход'}</td>
+                                <td className={access.action===0?'has-background-danger':'has-background-success'}>{access.action===1?'Вход':'Выход'}</td>
                             </tr>
                         ))}
                     </tbody>

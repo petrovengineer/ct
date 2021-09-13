@@ -10,19 +10,19 @@ const { Canvas } = require("canvas");
 //     {_id:'2', text:'QWQWEQWEQWEWE.', photos:[], time: (new Date()).toISOString()},
 // ]
 
-// const data = {
-//     name: 'Скворцов Игорь',
-//     observations,
-// }
+const data = {
+    dates: [new Date(2021,5,1), new Date(2021,6,2), new Date(2021,7,3)]
+}
 
-// const template = './templates/report.docx';
-// const output = './docs/report.docx';
+const template = './templates/worktime.docx';
+const output = './docs/worktime.docx';
+
 
 async function createDoc(template, output, data){
     const buffer = await createReport({
       template: fs.readFileSync(template),
       cmdDelimiter: ['{', '}'],
-      additionalJsContext:{
+      additisonalJsContext:{
         getImage: async (url)=>{
             const response = await fetch(url);
             const buffer = await response.buffer();
@@ -45,5 +45,7 @@ async function createDoc(template, output, data){
     });
     fs.writeFileSync(output, buffer)
 }
+
+createDoc(template, output, data)
 
 module.exports = {createDoc}

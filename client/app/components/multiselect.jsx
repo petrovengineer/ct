@@ -16,14 +16,15 @@ export default function Multiselect({arr=[], selected, setSelected, multi=false}
         const _id = e.target.getAttribute("_id")
         const newSelected = [...selected]
         const index = selected.indexOf(_id)
-        if(!index)return;
+        console.log("INDEX ", index);
+        if(index===-1)return;
         newSelected.splice(index, 1)
         setSelected(newSelected)
     }
     return (
         <div className={`dropdown ${list?'is-active':''}`}>
             <div className="dropdown-trigger" onClick={()=>showList(!list)} >
-                <button className="button">
+                <button className="button" style={{height:'auto'}}>
                     <Label arr={arr} selected={selected} multi={multi} remove={remove}/>
                     <span className="icon is-small">
                         <i className="fas fa-angle-down" aria-hidden="true"></i>
@@ -31,8 +32,12 @@ export default function Multiselect({arr=[], selected, setSelected, multi=false}
                 </button>
 
             </div>
-            <div className="dropdown-menu">
-                <div className="dropdown-content">
+            <div className="dropdown-menu" 
+                // style={{maxHeight:'400px', overflowY:'auto', overflowX:'none'}}
+            >
+                <div className="dropdown-content"
+                style={{maxHeight:'400px', overflowY:'auto', overflowX:'none'}}
+                >
                     {(!selected || (arr.filter(a=>selected.indexOf(a._id)===-1).length===0)) && <span className="dropdown-item has-text-grey-light">Нет элементов</span>}
                     {arr
                         .filter(a=>(!selected || selected.indexOf(a._id)===-1))
@@ -47,11 +52,13 @@ export default function Multiselect({arr=[], selected, setSelected, multi=false}
 function Label({arr, selected, multi, remove}){
     if(!selected || selected.length===0)return <div>Выбрать...</div>
     if(Array.isArray(selected)){
-        return selected.map(s=>
+        return <div className="is-flex is-flex-wrap-wrap">
+        {selected.map(s=>
             <div className="mx-1 is-size-7" key={s}>
                 {arr.length>0 && arr.find(a=>a._id===s).name}
-                {multi && <span className="delete is-small" onClick={remove}></span>}
-            </div>)
+                {multi && <span className="has-text-danger is-size-6 ml-1" _id={s} onClick={remove}>x</span>}
+            </div>)}
+        </div>
     }
     return <div>{arr && arr.length>0 && arr.find(a=>a._id===selected).name}</div>
 }

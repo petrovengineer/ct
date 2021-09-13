@@ -9,9 +9,6 @@ class Base{
     filter =  {
         skip: 0, 
         limit: 10,
-        sort: {
-            created: -1
-        }
     }
     constructor(api){
         makeObservable(this, {
@@ -25,7 +22,10 @@ class Base{
             setSkip: action,
             setDateRange: action,
             create: action,
-            removeItem: action
+            removeItem: action,
+            setId: action,
+            setFilter: action,
+            setItem: action,
         })
         this.api = api;
     }
@@ -40,6 +40,9 @@ class Base{
         this.count = count;
         this.data = data;
     }
+    setItem = (item, index)=>{
+        this.data[index] = item;
+    }
     removeItem = (_id) => {
         const index = this.data.findIndex((item)=>(item._id===_id))
         this.data.splice(index, 1);
@@ -53,6 +56,12 @@ class Base{
         this.filter.skip = 0;
         this.filter.limit = limit;
     }
+    setFilter = (filter) => {
+        this.filter = filter;
+    }
+    setId = (_id) => {
+        this.filter._id = _id
+    }
     setDateRange = ([startDate, endDate]) => {
         this.filter.startDate = startDate;
         if(endDate!=null)endDate.setHours(23,59,59,999);
@@ -61,17 +70,21 @@ class Base{
             this.setSkip(0);
         }
     }
-    fetch = async ()=>{
+    async fetch(done){
         try{
-            const {data, count} = await this.api.get(this.filter, this.sort);
-            this.setData(data, count);
+            const response = await this.api.get(this.filter);
+            const payload = this.api.extractData && this.api.extractData(response)
+            if(payload)this.setData(payload.data, payload.count);
+            if(done)done({data: payload.data, count: payload.count})
         }catch(e){
             Info.addMessage({message: e})
         }
     }
     create = async (data)=>{
         try{
-            const item = await this.api.create(data);
+            const response = await this.api.create(data);
+            const item = this.api.extractData && this.api.extractCreate(response)
+            console.log("ITEM ", item)
             const newData = [...(this.data || [])];
             newData.unshift(item);
             this.setData(newData, this.count+1);
