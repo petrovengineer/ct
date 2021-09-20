@@ -9,6 +9,9 @@ Copy credentials to ~/.aws
 PRODUCTION SERVER DEPLOY
 1. git remote add api dokku@claimtracker.ru:api
 2. git push api
+3. dokku domains:add api.claimtracker.ru
+4. add A record to DNS service
+5. dokku config:add DB_LINK=link_to_db etc...
 
 PRODUCTION FRONTEND DEPLOY
 1. git remote add frontend dokku@claimtracker.ru:frontend
