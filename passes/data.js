@@ -66,14 +66,14 @@ module.exports = {
     WILDBERRIS_CONST:{
         schema: './templates/schema5.jpg',
         renter: 'wildberries',
-        renterRu: 'Вайлдберис',
+        renterRu: 'Вайлдберриз',
         type: 'const',
         count: 10
     },
     WILDBERRIS_TEMP:{
         schema: './templates/schema5.jpg',
         renter: 'wildberries',
-        renterRu: 'Вайлдберис',
+        renterRu: 'Вайлдберриз',
         type: 'temp',
         count: 10
     },
@@ -90,5 +90,19 @@ module.exports = {
         renterRu: 'Окей',
         type: 'temp',
         count: 16
+    },
+    OZON_CONST:{
+        schema: './templates/schema8.jpg',
+        renter: 'ozon',
+        renterRu: 'Озон',
+        type: 'const',
+        count: 25
+    },
+    OZON_TEMP:{
+        schema: './templates/schema8.jpg',
+        renter: 'ozon',
+        renterRu: 'Озон',
+        type: 'temp',
+        count: 8
     }
 }

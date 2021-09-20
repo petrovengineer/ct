@@ -1,4 +1,4 @@
-import api from '_api/keys'
+import api from '_interfaces/keys'
 import Base from '_store/base'
 
 class Keys extends Base{

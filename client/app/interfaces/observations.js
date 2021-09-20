@@ -1,5 +1,5 @@
 const { default: axios } = require("axios");
-const { default: BaseApi } = require("_api/base");
+const { default: BaseApi } = require("_interfaces/base");
 import queries from '_queries/observations'
 import api from '_app/api'
 

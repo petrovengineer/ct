@@ -39,12 +39,12 @@ function createPasses(data){
     createDoc(template, output, data)
   }
 
-  // createPasses(data.SBER_TEMP)
+  createPasses(data.OZON_TEMP)
 
-for(let item in data){
-    console.log(data[item])
-    createPasses(data[item])
-}
+// for(let item in data){
+//     console.log(data[item])
+//     createPasses(data[item])
+// }
 
   // function createPasses(data, count){
 //   const template = './templates/pass.docx';

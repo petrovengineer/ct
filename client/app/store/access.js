@@ -1,4 +1,4 @@
-import api from '_api/access'
+import api from '_interfaces/access'
 import Base from '_store/base'
 
 class Access extends Base{

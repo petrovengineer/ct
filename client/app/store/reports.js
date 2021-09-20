@@ -1,6 +1,8 @@
 import {action, makeAutoObservable , makeObservable, observable } from 'mobx'
 import api from '../api';
 
+
+
 class Reports{
     reports = undefined;
     loading = true;
@@ -9,11 +11,9 @@ class Reports{
     filter =  {
         skip: 0, 
         limit: 10, 
-        // endDate: new Date(),
     }
     constructor() {
         makeAutoObservable(this)
-        // this.filter.startDate = new Date(this.filter.endDate.getTime()-24*60*60*1000)
     }
     fetchData = async () => {
         try{
@@ -42,7 +42,6 @@ class Reports{
         const modifedObservations = observations.map(({_id, text, time, photos})=>({_id, text, time, photos}))
         console.log(modifedObservations)
         api("mutation createReport($observations: [ObservationsInputType]){createReport(observations: $observations){_id observations{_id text time photos} author{_id name} created}}", 
-        // api("mutation createObservation($text: String, $time: String){createObservation(text: $text, time: $time) {_id time text photos author{_id name}}}", 
             {observations:modifedObservations})
         .then(action(({createReport: newReport})=>{
             console.log(newReport);

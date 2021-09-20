@@ -1,4 +1,4 @@
-import api from '_api/observations'
+import api from '_interfaces/observations'
 import Base from '_store/base'
 import {action, makeObservable, observable} from 'mobx'
 import getClearDate from '_app/time'

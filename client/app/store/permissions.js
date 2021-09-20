@@ -1,4 +1,4 @@
-import api from '_api/permissions'
+import api from '_interfaces/permissions'
 import Base from '_store/base'
 
 class Permissions extends Base{

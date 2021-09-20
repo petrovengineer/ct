@@ -2,11 +2,9 @@ import { observer } from 'mobx-react'
 import React, {useEffect} from 'react'
 // import Store from '_store/_observations'
 
-class WithBase{
+class WithData{
     constructor(store){
         this.store = store;
-        console.log("STore ", this.store)
-
         return this.WithData
     }
     WithData = observer(function WithData({children, filter}){
@@ -18,7 +16,7 @@ class WithBase{
     })
 }
 
-export default WithBase;
+export default WithData;
 
 // const WithObservations = ({children, filter})=>{
 //     useEffect(()=>{

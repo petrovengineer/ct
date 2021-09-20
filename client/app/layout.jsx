@@ -24,7 +24,7 @@ const Layout = observer(()=>{
     if(!iam) return <Welcome/>
     return (
         <BrowserRouter>
-            <Drawer/>
+            {/* <Drawer/> */}
             <Main>
                 <Switch>
                     <Route path="/users">

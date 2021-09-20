@@ -35,7 +35,7 @@ module.exports = (env) => {
         _app: path.resolve(__dirname, 'app/'),
         _hoc: path.resolve(__dirname, 'app/hoc'),
         _api: path.resolve(__dirname, 'app/api'),
-        _interfaces: path.resolve(__dirname, 'app/_interfaces'),
+        _interfaces: path.resolve(__dirname, 'app/interfaces'),
         _queries: path.resolve(__dirname, 'app/queries'),
         process: 'process/browser',
         stream: "stream-browserify",
