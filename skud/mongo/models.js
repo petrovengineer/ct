@@ -16,4 +16,9 @@ module.exports = {
         }},
         time:  {type: Date, default: Date.now},
     }),
+    Pass: mongoose.model('Pass',{
+        num: {type: Number}, 
+        renter: {type: String},
+        created:  {type: Date, default: Date.now},
+    }),
 }

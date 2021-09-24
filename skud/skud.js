@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser')
 const {formatDate} = require('./time.js');
-const {Key, Access} = require('./mongo/models')
+const {Key, Access, Pass} = require('./mongo/models')
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }))
@@ -145,6 +145,19 @@ router.patch('/access', async (req, res)=>{
     }
     catch(e){
         console.log(e)
+    }
+})
+
+router.get('/pass', async (req, res)=>{
+    try{
+        console.log("PARAMS ",req.query);
+        let {_id} = req.query;
+        if(!_id)return res.send("<h2>Error, id not specified!</h2>")
+        const pass = await Pass.findOne({_id}).lean();
+        if(!pass)return res.send("<h2>Pass not found!</h2>")
+        return res.send(`<h2>Арендатор: ${pass.renter}, номер: ${pass.num}</h2>`);
+    }catch(e){
+        console.log(e.message); return res.sendStatus(400)
     }
 })
 
