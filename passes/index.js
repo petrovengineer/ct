@@ -57,7 +57,7 @@ async function createDoc(template, output, data){
                 pass = doc2;
                 console.log("Exist pass 2", pass)
             }
-            data.info[num] = link+pass._id.toString();
+            data.info[num+1] = link+pass._id.toString();
 
             const buffer = await createReport({
               template: fs.readFileSync(template),
