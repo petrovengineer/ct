@@ -14,13 +14,12 @@ axios.interceptors.request.use(function (config) {
 
 export default (query, variables)=>{
     return new Promise((done, fail)=>{
-        console.log("QUERY ", query, "VARIABLES ", variables)
         axios.post(url ,{"query":query, "variables":variables})
         .then((response)=>{
             if(Array.isArray(response.data.errors) && response.data.errors.length>0){
                 return fail(response.data.errors[0].message);
             }
-            console.log("AXIOS", response)
+            console.log("AXIOS" ,{query, variables, response: response.data.data})
             done(response.data.data);
         })
         .catch((e)=>{

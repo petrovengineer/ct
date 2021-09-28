@@ -37,6 +37,7 @@ module.exports = (env) => {
         _api: path.resolve(__dirname, 'app/api'),
         _interfaces: path.resolve(__dirname, 'app/interfaces'),
         _queries: path.resolve(__dirname, 'app/queries'),
+        _entities: path.resolve(__dirname, 'app/entities'),
         process: 'process/browser',
         stream: "stream-browserify",
         zlib: "browserify-zlib",

@@ -1,18 +1,26 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {formatDate} from '_app/time'
 import Dates from '_components/dates'
 import Pages from '_components/pagination'
 import WithAccess from '_hoc/WithAccess'
 import Calendar from '_components/calendar'
+import {observer} from "mobx-react";
+import accessStore from '_entities/Accesses/store'
+import setDateRange from "_app/custom/setDateRange";
 
-export default ()=>(
-    <WithAccess limit={10}>
-        {({data, filter, setDateRange, setSkip, count})=>{
-        if(!data)return <h1 className="title">Загрузка...</h1>
+// export default ()=>(
+    // <WithAccess limit={10}>
+    const Accesses = ()=>{
+        const {cachedData:accesses, filter, setDateRange, updateFilter, count, get} = accessStore;
+        function onChange(startDate, endDate){
+            setDateRange(startDate, endDate, get, updateFilter)
+        }
+        if(!accesses)return <h1 className="title">Загрузка...</h1>
         return (
             <>
                 <h1 className="subtitle">Контроль доступа</h1>
-                <Calendar range startDate={filter.startDate} endDate={filter.endDate} onChange={(update)=>setDateRange(update)}/>
+                <Calendar startDate={startDate} endDate={endDate} onChange={onChange} range/>
+                {/*<Calendar range startDate={filter.startDate} endDate={filter.endDate} onChange={(update)=>setDateRange(update)}/>*/}
                 {/* <Dates startDate={filter.startDate} endDate={filter.endDate} setDateRange={setDateRange}/> */}
                 <table className="table">
                     <tbody>
@@ -22,7 +30,7 @@ export default ()=>(
                             <th>Код ключа</th>
                             <th>Действие</th>
                         </tr>
-                        {data.map(access=>(
+                        {accesses.map(access=>(
                             <tr key={access._id}>
                                 <td>{formatDate(access.time)}</td>
                                 <td>{access.key.owner?access.key.owner:'Неизвестный пользователь'}</td>
@@ -32,9 +40,12 @@ export default ()=>(
                         ))}
                     </tbody>
                 </table>
-                {filter.limit && <Pages count={count} limit={filter.limit} skip={filter.skip} setSkip={setSkip}/>}
+                {/*{filter.limit && <Pages count={count} limit={filter.limit} skip={filter.skip} setSkip={(skip)=>updateFilter(()=>({skip}))}/>}*/}
             </>
         )
-    }}
-    </WithAccess>
-)
+    }
+// }
+    // </WithAccess>
+// )
+
+export default observer(Accesses)

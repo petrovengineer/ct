@@ -38,4 +38,4 @@ const uploadImage = require('./upload')
 app.post('/upload', upload.single('file'), uploadImage)
 
 app.listen(port);
-console.log('GraphQL API server running at localhost:'+ port);
+console.log('Server running at localhost: '+ port);

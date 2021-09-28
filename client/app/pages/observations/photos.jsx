@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {upload} from '_app/api'
 import InfoStore from '_store/info'
-import ObservationsStore from '_store/_observations'
+import ObservationsStore from '_entities/Observations/store'
 import Photo from './photo'
 import Modal from '_components/modal'
 

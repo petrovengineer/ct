@@ -1,15 +1,16 @@
 import React from 'react'
-import IamStore from '../store/iam.js'
+import IamStore from '_entities/Iam/store'
 import { observer } from 'mobx-react';
+import {shortName} from "_app/usefull";
 
 const NavBar = observer(()=>{
-    const {exit, shortName} = IamStore
+    const {exit, iam} = IamStore
     return (
             <>
                 <div className="dropdown is-hoverable">
                     <div className="dropdown-trigger">
                         <a aria-haspopup="true" aria-controls="dropdown-menu" className="p-0">
-                            <span>{shortName}</span>
+                            <span>{shortName(iam.name)}</span>
                         </a>
                     </div>
                     <div className="dropdown-menu" id="dropdown-menu" role="menu">
@@ -18,7 +19,7 @@ const NavBar = observer(()=>{
                                 Сменить пароль
                             </a>
                             <hr className="dropdown-divider"/>
-                            <a href="#" className="dropdown-item" onClick={exit}>
+                            <a href="#" className="dropdown-item" onClick={exit.bind(IamStore)}>
                                 Выход
                                 {/* <span className="icon" style={{color: 'gray'}}>
                                     <i className="fas fa-sign-out-alt"></i>

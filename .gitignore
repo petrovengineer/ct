@@ -80,3 +80,7 @@ docs/
 server/.DS_Store
 
 server/temp
+
+.vscode/
+
+.idea/

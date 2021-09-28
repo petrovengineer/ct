@@ -42,15 +42,14 @@ export default ({onChange, startDate, endDate, range})=>{
             return;
         }
         if(select===0){
-            onChange([newDate, null]);
+            onChange(newDate, null);
             setSelect(1)
             return;
         }
         if(select===1){
             setSelect(0)
-            onChange([startDate, newDate]);
+            onChange(startDate, newDate);
             setTimeout(()=>{showCalendar(false);},1000) 
-            return;
         }
     }
     function ceilClass(d){
@@ -75,12 +74,12 @@ export default ({onChange, startDate, endDate, range})=>{
                     <a onClick={()=>{setDate(new Date(date.getFullYear(), date.getMonth()+1))}}>{">"}</a>
                 </div>
                 <div>
-                    {dayList.map((d,i)=>(<div style={s.cell}>{d}</div>))}
+                    {dayList.map((d,i)=>(<div key={i} style={s.cell}>{d}</div>))}
                 </div>
                 <div>
                     {getDays().map((d, i)=>(
-                        <>
-                            {(i===0)&&(getOffset().map((o,i)=>(<div style={{width: '30px', display:'inline-block'}}></div>)))}
+                        <span key={i}>
+                            {(i===0)&&(getOffset().map((o,i)=>(<div key={i} style={{width: '30px', display:'inline-block'}}></div>)))}
                             <div style={s.cell}
                                 onClick={()=>handleClick(d)}
                                 className={ceilClass(d)}
@@ -88,7 +87,7 @@ export default ({onChange, startDate, endDate, range})=>{
                                 {d}
                             </div>
                             {(new Date(date.getFullYear(), date.getMonth(), d).getDay()===0) && <br/>}
-                        </>
+                        </span>
                     ))}
                 </div>
             </div>}

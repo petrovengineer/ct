@@ -22,9 +22,10 @@ async function createDoc(data, done){
         getImage: async (url)=>{
             // const res1 = await fetch(url);
             // console.log("IMG URL",res1)
+            // const res = await axios.get(url, {responseType: 'arraybuffer'});
+            const res = await (await fetch(url)).arrayBuffer()
 
-            const res = await axios.get(url, {responseType: 'arraybuffer'});
-            return { width: 16, height: 12, data: res.data, extension: '.jpg' }; 
+            return { width: 16, height: 12, data: res, extension: '.jpg' };
         },
         getImageFromFile: async (path)=>{
           const buffer = fs.readFileSync(path);

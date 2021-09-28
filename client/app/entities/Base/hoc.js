@@ -7,13 +7,13 @@ class WithData{
         this.store = store;
         return this.WithData
     }
-    WithData = observer(function WithData({children, filter}){
+    WithData = observer(function WithData({children}){
         useEffect(()=>{
-            if(typeof filter === "function")this.store.updateFilter(filter)
-            // if(!this.store.data)this.store.fetch()
+            console.log("HOC",this. store.filter)
+            if(!this.store.data)this.store.get()
         }, [])
-        return children(this.store)
-    })
+        return children({...this.store, filter2: this.store.filter})
+    }.bind(this))
 }
 
 export default WithData;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Modal from '_components/modal'
-import ObservationStore from '_store/_observations'
+import ObservationStore from '_entities/Observations/store'
 import {observer} from 'mobx-react'
 
 const Photo = observer(({photo, oid, index, showLarge})=>{

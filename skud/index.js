@@ -3,7 +3,7 @@ var express = require('express');
 require('./mongo/connect.js')
 const skud = require('./skud')
 
-let port = process.env.PORT || 3000;
+let port = process.env.PORT || 3001;
 const app = express();
 
 app.use('/', skud);

@@ -10,8 +10,9 @@ module.exports = {
     },
     resolve: async (root,{filter = {}}, req)=>{
         console.log("REPORT FILTER ", filter, req._id)
+        // const filter = {time:{$gte:filter.startDate, $lte:filter.endDate || new Date()}};
         const reports =  await Report
-        .find({time:{$gte:filter.startDate, $lte:filter.endDate}})
+        .find()
         .sort({time: -1})
         .skip(filter.skip)
         .limit(filter.limit)

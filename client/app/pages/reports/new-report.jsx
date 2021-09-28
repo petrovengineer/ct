@@ -1,11 +1,23 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Dates from '_components/dates-range'
 import {formatDate} from '_app/time'
-import store from '_store/reports'
+import reportsStore from '_entities/Reports/store'
+import obsStore from '_entities/Observations/store'
+import {observer} from "mobx-react";
 
-export default function NewReport({filter, setDateRange, data=[]}){
+function NewReport(){
     const [checkList, setCheckList] = useState([])
-    console.log("NEW REPORT ", data)
+    const {data:observations} = obsStore;
+    useEffect(()=>{
+        obsStore.updateFilter(()=>({startDate: daysBefore(new Date(),1), endDate:new Date(), limit: null}))
+        obsStore.get()
+    }, [])
+    function daysBefore(date, days){
+        date.setHours(0);
+        date.setMinutes(0);
+        date.setSeconds(0);
+        return new Date(date.getTime()-days*24*60*60*1000)
+    }
     function handleChange(_id){
         const index = checkList.indexOf(_id)
         if(index<0)setCheckList([...checkList, _id])
@@ -17,8 +29,10 @@ export default function NewReport({filter, setDateRange, data=[]}){
 
     }
     function createReport(){
-        const fullList = checkList.map(_id=>(data.find(o=>o._id===_id)))
-        store.create(fullList);
+        const fullList = checkList
+            .map(_id=>(observations.find(o=>o._id===_id)))
+            .map(({_id, text, time, photos})=>({_id, text, time, photos}))
+        reportsStore.create({observations: fullList});
     }
     return (
         <div className="box">
@@ -26,10 +40,10 @@ export default function NewReport({filter, setDateRange, data=[]}){
                 Новый отчёт
             </div>
             <div className="field">
-                <Dates filter={filter} setDateRange={setDateRange}/>
+                {/*<Dates filter={filter} setDateRange={setDateRange}/>*/}
             </div>
             <div className="field">
-                {data.map((item)=>(
+                {observations && observations.map((item)=>(
                     <div>
                         <label className="checkbox" key={item._id} >
                             <input type="checkbox" checked={checkList.indexOf(item._id)>=0} onChange={()=>handleChange(item._id)} style={{width:'16px', height:'16px'}}/>
@@ -48,3 +62,5 @@ export default function NewReport({filter, setDateRange, data=[]}){
         </div>
     )
 }
+
+export default observer(NewReport)

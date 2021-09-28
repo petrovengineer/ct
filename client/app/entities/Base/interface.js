@@ -6,22 +6,28 @@ export default class Interface{
         this.queries = queries;
     }
     get = (filter)=>{
-        return new Promise(async(done, fail)=>{
+        return new Promise(async(resolve, reject)=>{
             try{
                 const response = await api(this.queries.get, {filter})
-                done(response)
-            }catch(e){
-                fail(e)
+                const data = response[this.queries.selectors.get];
+                // console.log("IFACE ", Array.isArray(data))
+                if(Array.isArray(data)){
+                    resolve({data, count: null})
+                }
+                resolve({data: data[this.queries.selectors.get], count: data.count})
+            }catch(err){
+                reject(err)
             }
         })
     }
-    create = (data)=>{
-        return new Promise(async(done, fail)=>{
+    create = (payload)=>{
+        return new Promise(async(resolve, reject)=>{
             try{
-                const response = await api(this.queries.create, data)
-                done(response)
-            }catch(e){
-                fail(e)
+                const data = await api(this.queries.create, payload)
+                console.log("IFACE CREATE ", data[this.queries.selectors.create])
+                resolve(data[this.queries.selectors.create])
+            }catch(err){
+                reject(err)
             }
         }) 
     }
