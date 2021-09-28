@@ -26,7 +26,7 @@ router.post('/access', async ({body}, res)=>{
 
 router.get('/access', async (req, res)=>{
     try{
-        console.log("PARAMS ",req.query);
+        console.log("ACCESS PARAMS ",req.query);
         let filter = req.query;
         const count = await Access.countDocuments({})
         .where({time:{$gte:filter.startDate || 0, $lte:filter.endDate || new Date()}})

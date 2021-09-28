@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-
+import {daysBefore} from '_app/time'
 import {dayList, monthList, monthListDec} from '_app/time'
 
 const s = {
     cell:{width: '30px', height:'30px', paddingTop: '2px', display:'inline-block', textAlign:'center', cursor:'pointer', marginTop:'5px'}
 }
 
-export default ({onChange, startDate, endDate, range})=>{
+export default ({onChange, startDate= daysBefore(new Date(), 1), endDate = new Date(), range})=>{
     const [date, setDate] = useState(new Date())
     const [calendar, showCalendar] = useState(false)
     const [select, setSelect] = useState(0)

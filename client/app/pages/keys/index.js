@@ -1,15 +1,14 @@
 import React, { useRef, useState } from 'react'
 import WithKeys from '_hoc/WithKeys'
 import Modal from '_components/modal'
-import Store from '_store/keys'
+import Store from '_entities/Keys/store'
 import Pages from '_components/pagination'
+import {observer} from "mobx-react";
 
-export default ()=>{
-    return (
-        <WithKeys>
-            {({data, count, filter, setSkip, remove})=>{
+const Keys = ()=>{
                 const [newKeyForm, showNewKeyForm] = useState(false)
                 const [toRemove, setToRemove] = useState(null)
+                const {cachedData: data, count, filter} = Store;
                 if(!data)return <h1 className="title">Загрузка...</h1>
                 function remove(){
                     Store.remove(toRemove)
@@ -40,14 +39,11 @@ export default ()=>{
                                 ))}
                             </tbody>
                         </table>
-                        <Pages count={count} limit={filter.limit} skip={filter.skip} setSkip={setSkip}/>
+                        {/*<Pages count={count} limit={filter.limit} skip={filter.skip} setSkip={setSkip}/>*/}
                         {newKeyForm && <NewKeyForm close={()=>showNewKeyForm(false)}/>}
                         {toRemove && <RemoveForm close={()=>{setToRemove(null)}} remove={remove}/>}
                     </>
                 )
-            }}
-        </WithKeys>
-    )
 }
 
 function RemoveForm({close, remove}){
@@ -97,3 +93,5 @@ function NewKeyForm({close}){
         </Modal>
     )
 }
+
+export default observer(Keys)

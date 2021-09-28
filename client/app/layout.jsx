@@ -10,8 +10,8 @@ import Observations from '_pages/observations'
 // const Observations = lazy(()=>import('_pages/observations'))
 import Reports from '_pages/reports'
 import Access from '_pages/access'
-// import WorkTime from '_pages/worktime'
-// import Keys from '_pages/keys'
+import WorkTime from '_pages/worktime'
+import Keys from '_pages/keys'
 // import Permissions from '_pages/permissions'
 //=============================================
 
@@ -40,10 +40,10 @@ export default function Layout(){
                                     <Access/>
                                 </Route>
                                 <Route path="/worktime">
-                                    {/*<WorkTime/>*/}
+                                    <WorkTime/>
                                 </Route>
                                 <Route path="/keys">
-                                    {/*<Keys/>*/}
+                                    <Keys/>
                                 </Route>
                                 <Route path="/permissions">
                                     {/*<Permissions/>*/}

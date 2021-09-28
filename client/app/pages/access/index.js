@@ -11,7 +11,7 @@ import setDateRange from "_app/custom/setDateRange";
 // export default ()=>(
     // <WithAccess limit={10}>
     const Accesses = ()=>{
-        const {cachedData:accesses, filter, setDateRange, updateFilter, count, get} = accessStore;
+        const {cachedData:accesses, filter, updateFilter, count, get} = accessStore;
         function onChange(startDate, endDate){
             setDateRange(startDate, endDate, get, updateFilter)
         }
@@ -19,7 +19,7 @@ import setDateRange from "_app/custom/setDateRange";
         return (
             <>
                 <h1 className="subtitle">Контроль доступа</h1>
-                <Calendar startDate={startDate} endDate={endDate} onChange={onChange} range/>
+                <Calendar startDate={filter.startDate} endDate={filter.endDate} onChange={onChange} range/>
                 {/*<Calendar range startDate={filter.startDate} endDate={filter.endDate} onChange={(update)=>setDateRange(update)}/>*/}
                 {/* <Dates startDate={filter.startDate} endDate={filter.endDate} setDateRange={setDateRange}/> */}
                 <table className="table">
@@ -33,14 +33,14 @@ import setDateRange from "_app/custom/setDateRange";
                         {accesses.map(access=>(
                             <tr key={access._id}>
                                 <td>{formatDate(access.time)}</td>
-                                <td>{access.key.owner?access.key.owner:'Неизвестный пользователь'}</td>
-                                <td>{access.key.data}</td>
+                                <td>{(access.key && access.key.owner)?access.key.owner:'Неизвестный пользователь'}</td>
+                                <td>{(access.key && access.key.data)?access.key.data:'?????????'}</td>
                                 <td className={access.action===0?'has-background-danger':'has-background-success'}>{access.action===1?'Вход':'Выход'}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                {/*{filter.limit && <Pages count={count} limit={filter.limit} skip={filter.skip} setSkip={(skip)=>updateFilter(()=>({skip}))}/>}*/}
+                {filter.limit && <Pages count={count} limit={filter.limit} skip={filter.skip} updateFilter={updateFilter} get={get}/>}
             </>
         )
     }

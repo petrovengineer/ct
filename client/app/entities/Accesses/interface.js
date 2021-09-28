@@ -3,7 +3,7 @@ import queries from './queries'
 import {default as axios} from "axios";
 
 class AccessesIface extends BaseIface{
-    url = process.env.API+'/skud'
+    url = process.env.API_SKUD
     constructor(queries) {
         super(queries);
     }

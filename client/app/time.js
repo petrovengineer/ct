@@ -35,9 +35,16 @@ function getAmount(inTime, outTime){
     return (Math.floor(amount / (1000*60*60)))
 }
 
+function daysBefore(date, days){
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    return new Date(date.getTime()-days*24*60*60*1000)
+}
+
 const weekDaysShort = ['Вс','Пн','Вт','Ср','Чт','Пт','Сб',]
 const monthList = ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь']
 const monthListDec = ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря']
 const dayList = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
 
-module.exports = {formatDate, formatTime, addZero, weekDaysShort, monthList, dayList, monthListDec, getClearDate, getAmount}
+module.exports = {formatDate, formatTime, addZero, weekDaysShort, monthList, dayList, monthListDec, getClearDate, getAmount, daysBefore}

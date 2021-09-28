@@ -9,18 +9,22 @@ import MultiSelect from '_components/multiselect'
 import {DocumentCreator} from '../../custom/table-generator'
 import { Packer } from "docx";
 import { saveAs } from "file-saver";
+import {observer} from "mobx-react";
+import setDateRange from "_app/custom/setDateRange";
+import accessesStore from '_entities/Accesses/store'
+import keysStore from '_entities/Keys/store'
 
 const startWorkTime = 9;
 const endWorkTime = 17;
 
-export default ()=>(
-    <WithAccess limit={null}>
-        {({data: accesses, filter, setDateRange, setSkip, count, limit, setLimit})=>{
+const WorkTime = ()=>{
             const [dates, setDates] = useState([])
             const [entries, setEntries] = useState([])
             const [showTime, setShowTime] = useState(true)
             const [oneReader, setOneReader] = useState(false)
             const [selected, setSelected] = useState([])
+            const {cachedData: accesses, filter, updateFilter, count, limit, get} = accessesStore;
+            const {cachedData: keys} = keysStore;
             useEffect(()=>{
                 setDates(getDates());
                 if(limit !== undefined)return;
@@ -30,7 +34,9 @@ export default ()=>(
 
             function getEntries(){
                 const entries = [];
+                console.log("ACCESSES ", accesses)
                 for(let i=0; i<accesses.length;i++){
+                    if(!accesses[i].key)continue;
                     if(!accesses[i].key.owner)continue;
                     let entry = entries.find(e=>e.owner===accesses[i].key.owner)
                     if(!entry){
@@ -59,7 +65,6 @@ export default ()=>(
                         entry.dates[entryDateIndex].out = new Date(accessDate.getTime())
                     }
                 }
-                // console.log("ENTRIES ", entries.map(e=>{e.dates return e}))
                 return entries;
             }
             function getDates(){
@@ -71,7 +76,6 @@ export default ()=>(
                     dates.push(new Date(date))
                     date.setDate(date.getDate()+1);
                 }
-                console.log("DATES ", dates.map(d=>d.toISOString()))
                 return dates;
             }
             function renderTime(date){
@@ -98,27 +102,28 @@ export default ()=>(
                     console.log("Document created successfully", blob);
                   });
             }
+            function onChange(startDate, endDate){
+                setDateRange(startDate, endDate, get, updateFilter)
+            }
             if(!accesses)return <h1 className="title">Загрузка...</h1>
             return (
                 <>
                     <h1 className="subtitle">Учёт рабочего времени</h1>
                     <div className="block">
-                        <Calendar range startDate={filter.startDate} endDate={filter.endDate} onChange={setDateRange}/>
+                        <Calendar startDate={filter.startDate} endDate={filter.endDate} onChange={onChange} range/>
                     </div>
                     <div className="block">
-                        <label class="checkbox is-flex is-align-content-center">
+                        <label className="checkbox is-flex is-align-content-center">
                             <input type="checkbox" checked={showTime} style={{height:'18px', width:'18px'}} onChange={()=>setShowTime(!showTime)}/>
                             Показать время
                         </label>
-                        <label class="checkbox is-flex is-align-content-center">
+                        <label className="checkbox is-flex is-align-content-center">
                             <input type="checkbox" checked={oneReader} style={{height:'18px', width:'18px'}} onChange={()=>setOneReader(!oneReader)}/>
                             Учитывать один считыватель
                         </label>
                     </div>
                     <div className="block">
-                        <WithKeys limit={9999999999}>
-                            {({data:keys=[]})=><MultiSelect arr={keys.map(({_id, owner})=>({_id, name: shortName(owner)}))} selected={selected} setSelected={setSelected} multi/>}
-                        </WithKeys>
+                        {keys && <MultiSelect arr={keys.map(({_id, owner})=>({_id, name: shortName(owner)}))} selected={selected} setSelected={setSelected} multi/>}
                     </div>
                     <hr/>              
                     {(!filter.startDate || !filter.endDate || selected.length===0)?
@@ -147,7 +152,7 @@ export default ()=>(
                                                     {dates.map((date,i)=>{
                                                         const entryDate = entry.dates.find(entryDate=>(entryDate.date.getTime()===getClearDate(date).getTime()))
                                                         if(!entryDate)return <td className="has-text-grey-light">x</td>
-                                                        return <td >
+                                                        return <td key={i}>
                                                             <div className="is-flex">
                                                                 <span className="mr-2 mt-1">
                                                                     {getAmount(entryDate.in, entryDate.out)}
@@ -172,9 +177,7 @@ export default ()=>(
                     }
                 </>
             )
-        }}
-    </WithAccess>
-)
+}
 
 function HeaderDates({date}){
     return (
@@ -184,3 +187,5 @@ function HeaderDates({date}){
         </th>
     )
 }
+
+export default observer(WorkTime)
