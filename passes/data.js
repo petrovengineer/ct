@@ -104,5 +104,12 @@ module.exports = {
         renterRu: 'Озон',
         type: 'temp',
         count: 8
+    },
+    TEST_TEMP:{
+        schema: './templates/schema8.jpg',
+        renter: 'test',
+        renterRu: 'Test',
+        type: 'temp',
+        count: 5
     }
 }

@@ -48,3 +48,7 @@ Content-Type: application/json
 ###
 PATCH http://localhost:3000/skud/access
 Content-Type: application/json
+
+###
+GET http://localhost:3000/pass
+Content-Type: application/json
